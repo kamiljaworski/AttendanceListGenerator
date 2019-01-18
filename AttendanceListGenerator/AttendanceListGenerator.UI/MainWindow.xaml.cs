@@ -28,7 +28,7 @@ namespace AttendanceListGenerator.UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PDFGenerator generator = new PDFGenerator();
+            PdfGenerator generator = new PdfGenerator();
             generator.Generate();
         }
     }
