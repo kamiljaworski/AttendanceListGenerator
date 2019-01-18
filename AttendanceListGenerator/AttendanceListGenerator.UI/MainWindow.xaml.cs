@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceListGenerator.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace AttendanceListGenerator.UI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PDFGenerator generator = new PDFGenerator();
+            generator.Generate();
         }
     }
 }
