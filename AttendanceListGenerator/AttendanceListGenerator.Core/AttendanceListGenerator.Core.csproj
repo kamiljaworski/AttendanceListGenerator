@@ -60,13 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Day.cs" />
-    <Compile Include="DayOfWeek.cs" />
-    <Compile Include="IDay.cs" />
-    <Compile Include="IMonthData.cs" />
-    <Compile Include="Month.cs" />
-    <Compile Include="MonthData.cs" />
-    <Compile Include="PdfGenerator.cs" />
+    <Compile Include="Data\Day.cs" />
+    <Compile Include="Data\DayOfWeek.cs" />
+    <Compile Include="Data\IDay.cs" />
+    <Compile Include="Data\IMonthData.cs" />
+    <Compile Include="Data\Month.cs" />
+    <Compile Include="Data\MonthData.cs" />
+    <Compile Include="Pdf\PdfGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

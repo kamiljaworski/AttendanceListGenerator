@@ -1,4 +1,4 @@
-﻿namespace AttendanceListGenerator.Core
+﻿namespace AttendanceListGenerator.Core.Data
 {
     public class Day : IDay
     {

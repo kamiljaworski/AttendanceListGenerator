@@ -4,7 +4,7 @@ using MigraDoc.Rendering;
 using PdfSharp1_32.Pdf;
 using System.Diagnostics;
 
-namespace AttendanceListGenerator.Core
+namespace AttendanceListGenerator.Core.Pdf
 {
     public class PdfGenerator
     {

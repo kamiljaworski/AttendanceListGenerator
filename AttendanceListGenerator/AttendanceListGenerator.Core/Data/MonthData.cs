@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AttendanceListGenerator.Core
+namespace AttendanceListGenerator.Core.Data
 {
     public class MonthData : IMonthData
     {
