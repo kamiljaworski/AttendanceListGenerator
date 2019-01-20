@@ -63,7 +63,9 @@
     <Compile Include="Day.cs" />
     <Compile Include="DayOfWeek.cs" />
     <Compile Include="IDay.cs" />
+    <Compile Include="IMonthData.cs" />
     <Compile Include="Month.cs" />
+    <Compile Include="MonthData.cs" />
     <Compile Include="PdfGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
