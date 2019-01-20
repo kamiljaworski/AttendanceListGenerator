@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceListGenerator.UI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceListGenerator.Core", "AttendanceListGenerator.Core\AttendanceListGenerator.Core.csproj", "{FEE2522F-5D3D-448D-9167-000C8025F991}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceListGenerator.Core.Tests.Unit", "AttendanceListGenerator.Core.Tests.Unit\AttendanceListGenerator.Core.Tests.Unit.csproj", "{727D8DE0-AC87-4EE7-9754-CBD7BD04DE6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FEE2522F-5D3D-448D-9167-000C8025F991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEE2522F-5D3D-448D-9167-000C8025F991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEE2522F-5D3D-448D-9167-000C8025F991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{727D8DE0-AC87-4EE7-9754-CBD7BD04DE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{727D8DE0-AC87-4EE7-9754-CBD7BD04DE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{727D8DE0-AC87-4EE7-9754-CBD7BD04DE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{727D8DE0-AC87-4EE7-9754-CBD7BD04DE6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
