@@ -1,6 +1,7 @@
 ﻿using AttendanceListGenerator.Core.Data;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.Data
 {
@@ -56,6 +57,32 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
             MonthData monthData = new MonthData(Month.February, 2019);
 
             Assert.That(monthData.Days.Count, Is.EqualTo(28));
+        }
+
+        [Test]
+        public void Constructor_February2019_ListOfDaysDoNotContainAnyNull()
+        {
+            MonthData monthData = new MonthData(Month.February, 2019);
+
+            CollectionAssert.AllItemsAreNotNull(monthData.Days);
+        }
+
+        [Test]
+        public void Constructor_February2019_FirstDayInFebruaryIsFriday()
+        {
+            MonthData monthData = new MonthData(Month.February, 2019);
+            IDay firstDay = monthData.Days.FirstOrDefault();
+
+            Assert.That(firstDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Friday));
+        }
+
+        [Test]
+        public void Constructor_February2019_LastDayInFebruaryIsThursday()
+        {
+            MonthData monthData = new MonthData(Month.February, 2019);
+            IDay lastDay = monthData.Days.LastOrDefault();
+
+            Assert.That(lastDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Thursday));
         }
     }
 }

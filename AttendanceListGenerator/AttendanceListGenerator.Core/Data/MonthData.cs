@@ -5,6 +5,8 @@ namespace AttendanceListGenerator.Core.Data
 {
     public class MonthData : IMonthData
     {
+        private const int _maxNumberOfDaysInAMonth = 31;
+
         public IList<IDay> Days { get; private set; }
         public Month Month { get; private set; }
         public int Year { get; private set; }
@@ -14,7 +16,7 @@ namespace AttendanceListGenerator.Core.Data
             if (year < 1900 || year > 2100)
                 throw new ArgumentOutOfRangeException();
 
-            Days = new List<IDay>();
+            Days = new List<IDay>(_maxNumberOfDaysInAMonth);
             Month = month;
             Year = year;
 
@@ -24,10 +26,14 @@ namespace AttendanceListGenerator.Core.Data
         private void CreateDaysList()
         {
             int daysInMonth = DateTime.DaysInMonth(Year, (int)Month);
-            DayOfWeek dayOfWeekOfFirstDayInMonth = new DateTime(1, (int)Month, Year).DayOfWeek;
+            DayOfWeek currentDayOfWeek = new DateTime(Year, (int)Month, 1).DayOfWeek;
 
-            for (int i = 0; i < daysInMonth; ++i)
-                Days.Add(null);
+            for (int i = 1; i <= daysInMonth; ++i)
+            {
+                IDay day = new Day(i, currentDayOfWeek);
+                Days.Add(day);
+                currentDayOfWeek = currentDayOfWeek.Next();
+            }
         }
     }
 }

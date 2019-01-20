@@ -4,10 +4,12 @@ namespace AttendanceListGenerator.Core.Data
 {
     public class Day : IDay
     {
-        public DayOfWeek DayOfWeek { get; }
+        public int DayOfMonth { get; private set; }
+        public DayOfWeek DayOfWeek { get; private set; }
 
-        public Day(DayOfWeek dayOfWeek)
+        public Day(int dayOfMonth, DayOfWeek dayOfWeek)
         {
+            DayOfMonth = dayOfMonth;
             DayOfWeek = dayOfWeek;
         }
     }
