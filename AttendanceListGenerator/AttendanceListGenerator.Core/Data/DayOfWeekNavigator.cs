@@ -2,7 +2,7 @@
 
 namespace AttendanceListGenerator.Core.Data
 {
-    public static class DayOfWeekHelpers
+    public static class DayOfWeekNavigator
     {
         private static readonly DayOfWeek[] _daysOfWeek = (DayOfWeek[])Enum.GetValues(typeof(DayOfWeek));
 

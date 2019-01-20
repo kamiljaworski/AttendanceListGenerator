@@ -4,7 +4,7 @@ using System;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.Data
 {
-    class DayOfWeekHelpersTests
+    class DayOfWeekNavigatorTests
     {
         [TestCase(DayOfWeek.Monday, DayOfWeek.Tuesday)]
         [TestCase(DayOfWeek.Tuesday, DayOfWeek.Wednesday)]
@@ -29,9 +29,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday)]
         public void Previous_ReturnsProperNextDay(DayOfWeek current, DayOfWeek expected)
         {
-            DayOfWeek nextDayOfWeek = current.Previous();
+            DayOfWeek previousDayOfWeek = current.Previous();
 
-            Assert.That(nextDayOfWeek, Is.EqualTo(expected));
+            Assert.That(previousDayOfWeek, Is.EqualTo(expected));
         }
     }
 }
