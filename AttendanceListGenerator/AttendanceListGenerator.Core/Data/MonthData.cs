@@ -24,7 +24,7 @@ namespace AttendanceListGenerator.Core.Data
         private void CreateDaysList()
         {
             int daysInMonth = DateTime.DaysInMonth(Year, (int)Month);
-            new DateTime(1, 2, 2019).DayOfWeek
+            DayOfWeek dayOfWeekOfFirstDayInMonth = new DateTime(1, (int)Month, Year).DayOfWeek;
 
             for (int i = 0; i < daysInMonth; ++i)
                 Days.Add(null);
