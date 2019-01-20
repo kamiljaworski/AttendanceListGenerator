@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Day.cs" />
-    <Compile Include="Data\DayOfWeek.cs" />
     <Compile Include="Data\IDay.cs" />
     <Compile Include="Data\IMonthData.cs" />
     <Compile Include="Data\Month.cs" />

@@ -1,4 +1,6 @@
-﻿namespace AttendanceListGenerator.Core.Data
+﻿using System;
+
+namespace AttendanceListGenerator.Core.Data
 {
     public interface IDay
     {
