@@ -67,6 +67,8 @@
     <Compile Include="Data\IDay.cs" />
     <Compile Include="Data\Month.cs" />
     <Compile Include="Helpers\EnumNavigator.cs" />
+    <Compile Include="Pdf\AttendanceListDocumentGenerator.cs" />
+    <Compile Include="Pdf\IAttendanceListDocumentGenerator.cs" />
     <Compile Include="Pdf\PdfGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
