@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 namespace AttendanceListGenerator.Core.Data
 {
-    public class MonthData : IMonthData
+    public class AttendanceListData : IAttendanceListData
     {
         private const int _maxNumberOfDaysInAMonth = 31;
 
         public IList<IDay> Days { get; private set; }
+        public IList<string> FullNames { get; private set; }
         public Month Month { get; private set; }
         public int Year { get; private set; }
 
-        public MonthData(Month month, int year)
+
+        public AttendanceListData(Month month, int year)
         {
             if (year < 1900 || year > 2100)
                 throw new ArgumentOutOfRangeException();

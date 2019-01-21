@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.Data
 {
-    class MonthDataTests
+    class AttendanceListDataTests
     {
         [TestCase(Month.February)]
         [TestCase(Month.March)]
@@ -13,7 +13,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(Month.December)]
         public void Constructor_Month_MonthIsEqualToGivenMonth(Month month)
         {
-            MonthData monthData = new MonthData(month, 2019);
+            AttendanceListData monthData = new AttendanceListData(month, 2019);
 
             Assert.That(monthData.Month, Is.EqualTo(month));
         }
@@ -24,7 +24,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2010)]
         public void Constructor_Year_YearIsEqualToGivenYear(int year)
         {
-            MonthData monthData = new MonthData(Month.January, year);
+            AttendanceListData monthData = new AttendanceListData(Month.January, year);
 
             Assert.That(monthData.Year, Is.EqualTo(year));
         }
@@ -37,7 +37,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2500)]
         public void Constructor_YearLessThan1900OrAbove2100_ThrowArgumentOutOfRangeException(int year)
         {
-            TestDelegate constructor = () => new MonthData(Month.January, year);
+            TestDelegate constructor = () => new AttendanceListData(Month.January, year);
 
             Assert.That(constructor, Throws.InstanceOf<ArgumentOutOfRangeException>());
         }
@@ -46,7 +46,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2100)]
         public void Constructor_Year1900And2100_DoNotThrowArgumentOutOfRangeException(int year)
         {
-            TestDelegate constructor = () => new MonthData(Month.January, year);
+            TestDelegate constructor = () => new AttendanceListData(Month.January, year);
 
             Assert.That(constructor, Throws.Nothing);
         }
@@ -54,7 +54,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_February2019_CreateListOf28Days()
         {
-            MonthData monthData = new MonthData(Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(Month.February, 2019);
 
             Assert.That(monthData.Days.Count, Is.EqualTo(28));
         }
@@ -62,7 +62,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_February2019_ListOfDaysDoNotContainAnyNull()
         {
-            MonthData monthData = new MonthData(Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(Month.February, 2019);
 
             CollectionAssert.AllItemsAreNotNull(monthData.Days);
         }
@@ -70,7 +70,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_February2019_FirstDayInFebruaryIsFriday()
         {
-            MonthData monthData = new MonthData(Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(Month.February, 2019);
             IDay firstDay = monthData.Days.FirstOrDefault();
 
             Assert.That(firstDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Friday));
@@ -79,7 +79,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_February2019_LastDayInFebruaryIsThursday()
         {
-            MonthData monthData = new MonthData(Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(Month.February, 2019);
             IDay lastDay = monthData.Days.LastOrDefault();
 
             Assert.That(lastDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Thursday));

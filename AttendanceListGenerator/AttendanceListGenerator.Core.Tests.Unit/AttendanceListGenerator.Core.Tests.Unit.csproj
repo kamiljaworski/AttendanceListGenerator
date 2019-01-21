@@ -60,8 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AttendanceListDataTests.cs" />
     <Compile Include="Data\DayOfWeekNavigatorTests.cs" />
-    <Compile Include="Data\MonthDataTests.cs" />
     <Compile Include="Helpers\EnumNavigatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
