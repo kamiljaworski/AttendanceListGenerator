@@ -1,5 +1,6 @@
 ﻿using AttendanceListGenerator.Core.Data;
 using MigraDoc.DocumentObjectModel;
+using System;
 
 namespace AttendanceListGenerator.Core.Pdf
 {
@@ -10,6 +11,9 @@ namespace AttendanceListGenerator.Core.Pdf
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
         {
+            if (data == null || names == null)
+                throw new ArgumentNullException();
+
             _data = data;
             _names = names;
         }

@@ -11,6 +11,30 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
     class AttendanceListDocumentGeneratorTests
     {
         [Test]
+        public void Constructor_PassNullIAttendanceListDataArgument_ThrowsArgumentNullException()
+        {
+            TestDelegate constructor = () => new AttendanceListDocumentGenerator(null, Mock.Of<ILocalizedNames>());
+
+            Assert.That(constructor, Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void Constructor_PassNullILocalizedNamesArgument_ThrowsArgumentNullException()
+        {
+            TestDelegate constructor = () => new AttendanceListDocumentGenerator(Mock.Of<IAttendanceListData>(), null);
+
+            Assert.That(constructor, Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void Constructor_PassNullArguments_ThrowsArgumentNullException()
+        {
+            TestDelegate constructor = () => new AttendanceListDocumentGenerator(null, null);
+
+            Assert.That(constructor, Throws.ArgumentNullException);
+        }
+
+        [Test]
         public void GenerateDocument_PassValidData_GeneratesDocumentWithOneSection()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator(); ;
