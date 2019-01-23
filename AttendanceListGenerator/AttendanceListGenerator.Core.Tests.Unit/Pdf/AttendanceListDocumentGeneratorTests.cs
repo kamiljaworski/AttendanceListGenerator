@@ -54,6 +54,16 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             Assert.That(document.Sections[0].PageSetup.Orientation, Is.EqualTo(Orientation.Landscape));
         }
 
+        [Test]
+        public void GenerateDocument_PassValidData_GeneratesParagraphWithMonthNameAndYearInTheSection()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
+            Document document = documentGenerator.GenerateDocument();
+
+            Assert.That(((Text)document.Sections[0].LastParagraph.Elements[0]).Content, Is.EqualTo("Styczeń 2019"));
+        }
+
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
         {
             IList<string> fullnames = new List<string> { "James Hunt", "William Jefferson", "Ryan Carroll" };
@@ -99,7 +109,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
                                                         a.Month == Month.January && 
                                                         a.Year == 2019);
 
-            ILocalizedNames names = Mock.Of<ILocalizedNames>();
+            ILocalizedNames names = Mock.Of<ILocalizedNames>
+                                   (n => 
+                                    n.GetDocumentTitle(Month.January, 2019) == "Styczeń 2019");
 
             return new AttendanceListDocumentGenerator(stubAttendanceListData, names);
         }

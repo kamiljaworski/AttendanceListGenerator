@@ -25,7 +25,7 @@ namespace AttendanceListGenerator.Core.Pdf
             
             // Document information
             document.Info.Author = _names.DocumentAuthor;
-            document.Info.Title = _names.DocumentTitle;
+            document.Info.Title = _names.GetDocumentTitle(_data.Month, _data.Year);
             document.Info.Comment = _names.DocumentComment;
 
             // Get the default page setup and change its orientation to Landscape
@@ -37,6 +37,10 @@ namespace AttendanceListGenerator.Core.Pdf
 
             // Change section setup
             section.PageSetup = setup;
+
+            // Add a paragraph and title text
+            Paragraph paragraph = section.AddParagraph();
+            paragraph.AddText(_names.GetDocumentTitle(_data.Month, _data.Year));
 
             return document;
         }
