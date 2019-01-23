@@ -65,6 +65,7 @@
     <Compile Include="Data\DayOfWeekNavigator.cs" />
     <Compile Include="Data\IAttendanceListData.cs" />
     <Compile Include="Data\IDay.cs" />
+    <Compile Include="Data\ILocalizedNames.cs" />
     <Compile Include="Data\Month.cs" />
     <Compile Include="Helpers\EnumNavigator.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGenerator.cs" />

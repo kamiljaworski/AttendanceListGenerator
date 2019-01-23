@@ -75,7 +75,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
                                                         a.Month == Month.January && 
                                                         a.Year == 2019);
 
-            return new AttendanceListDocumentGenerator(stubAttendanceListData);
+            ILocalizedNames names = Mock.Of<ILocalizedNames>();
+
+            return new AttendanceListDocumentGenerator(stubAttendanceListData, names);
         }
     }
 }
