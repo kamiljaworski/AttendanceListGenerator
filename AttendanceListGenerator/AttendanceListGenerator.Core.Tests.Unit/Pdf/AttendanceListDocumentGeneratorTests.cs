@@ -1,6 +1,7 @@
 ﻿using AttendanceListGenerator.Core.Data;
 using AttendanceListGenerator.Core.Pdf;
 using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -38,30 +39,112 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_GeneratesDocumentWithOneSection()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator(); ;
-
             Document document = documentGenerator.GenerateDocument();
 
-            Assert.That(document.Sections.Count, Is.EqualTo(1));
+            int numberOfSections = document.Sections.Count;
+
+            Assert.That(numberOfSections, Is.EqualTo(1));
         }
 
         [Test]
         public void GenerateDocument_PassValidData_GeneratesDocumentWithLandscapeSectionOrientation()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-
             Document document = documentGenerator.GenerateDocument();
 
-            Assert.That(document.Sections[0].PageSetup.Orientation, Is.EqualTo(Orientation.Landscape));
+            Orientation orientation = document.Sections[0].PageSetup.Orientation;
+
+            Assert.That(orientation, Is.EqualTo(Orientation.Landscape));
         }
 
         [Test]
         public void GenerateDocument_PassValidData_GeneratesParagraphWithMonthNameAndYearInTheSection()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-
             Document document = documentGenerator.GenerateDocument();
 
-            Assert.That(((Text)document.Sections[0].LastParagraph.Elements[0]).Content, Is.EqualTo("Styczeń 2019"));
+            string content = ((Text)document.Sections[0].LastParagraph.Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("Styczeń 2019"));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_GeneratesTable()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            Table table = document.Sections[0].LastTable;
+
+            Assert.That(table, Is.Not.Null);
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_GeneratesTableWith8Columns()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            int numberOfColumns = document.Sections[0].LastTable.Columns.Count;
+
+            Assert.That(numberOfColumns, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_TablesFirstFullnameIsEqualToPassedFullname()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[1].Elements[0]).Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("James Hunt"));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_TablesThirdFullnameIsEqualToPassedFullname()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[3].Elements[0]).Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("Ryan Carroll"));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_TablesFourthFullnameDoesNotExistAndThrowsException()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            TestDelegate getContent = () => content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[6].Elements[0]).Elements[0]).Content;
+
+            Assert.That(getContent, Throws.InstanceOf<ArgumentOutOfRangeException>());
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_GeneratesTableWith32Rows()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            int numberOfRows = document.Sections[0].LastTable.Rows.Count;
+
+            Assert.That(numberOfRows, Is.EqualTo(32));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_TablesFourthRowsFirstColumnIsEqualTo3()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[0].Elements[0]).Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("4."));
         }
 
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
@@ -104,13 +187,13 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             IAttendanceListData stubAttendanceListData = Mock.Of<IAttendanceListData>
                                                        (a =>
-                                                        a.Fullnames == fullnames && 
-                                                        a.Days == days && 
-                                                        a.Month == Month.January && 
+                                                        a.Fullnames == fullnames &&
+                                                        a.Days == days &&
+                                                        a.Month == Month.January &&
                                                         a.Year == 2019);
 
             ILocalizedNames names = Mock.Of<ILocalizedNames>
-                                   (n => 
+                                   (n =>
                                     n.GetDocumentTitle(Month.January, 2019) == "Styczeń 2019");
 
             return new AttendanceListDocumentGenerator(stubAttendanceListData, names);

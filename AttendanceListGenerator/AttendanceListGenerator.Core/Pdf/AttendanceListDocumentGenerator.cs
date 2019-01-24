@@ -1,5 +1,6 @@
 ﻿using AttendanceListGenerator.Core.Data;
 using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
 using System;
 
 namespace AttendanceListGenerator.Core.Pdf
@@ -8,6 +9,8 @@ namespace AttendanceListGenerator.Core.Pdf
     {
         private readonly IAttendanceListData _data;
         private readonly ILocalizedNames _names;
+
+        private const int _numberOfTableColumns = 8;
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
         {
@@ -22,7 +25,7 @@ namespace AttendanceListGenerator.Core.Pdf
         {
             // Create a document
             Document document = new Document();
-            
+
             // Document information
             document.Info.Author = _names.DocumentAuthor;
             document.Info.Title = _names.GetDocumentTitle(_data.Month, _data.Year);
@@ -41,6 +44,34 @@ namespace AttendanceListGenerator.Core.Pdf
             // Add a paragraph and title text
             Paragraph paragraph = section.AddParagraph();
             paragraph.AddText(_names.GetDocumentTitle(_data.Month, _data.Year));
+
+            // Add a table with black borders
+            Table table = section.AddTable();
+            table.Borders.Color = Colors.Black;
+
+            // Add columns
+            for (int i = 0; i < _numberOfTableColumns; ++i)
+                table.AddColumn();
+
+            // Add fullnames list to the table
+            Row row = table.AddRow();
+            for (int i = 1; i < _numberOfTableColumns; ++i)
+            {
+                if (i <= _data.Fullnames.Count)
+                    row.Cells[i].AddParagraph(_data.Fullnames[i - 1]);
+            }
+
+            // Add a row for each day
+            foreach (IDay day in _data.Days)
+            {
+                // Create day number formatted with dot at the end of number like: '1.', '2.', '21.'
+                string dayNumber = $"{day.DayOfMonth}.";
+                row = table.AddRow();
+                row.Cells[0].AddParagraph(dayNumber);
+            }
+
+
+
 
             return document;
         }
