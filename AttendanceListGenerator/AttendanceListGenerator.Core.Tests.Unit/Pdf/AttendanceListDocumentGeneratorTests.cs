@@ -80,14 +80,14 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidData_GeneratesTableWith8Columns()
+        public void GenerateDocument_PassValidData_GeneratesTableWith9Columns()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
             int numberOfColumns = document.Sections[0].LastTable.Columns.Count;
 
-            Assert.That(numberOfColumns, Is.EqualTo(8));
+            Assert.That(numberOfColumns, Is.EqualTo(9));
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
-            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[1].Elements[0]).Elements[0]).Content;
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[2].Elements[0]).Elements[0]).Content;
 
             Assert.That(content, Is.EqualTo("James Hunt"));
         }
@@ -107,7 +107,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
-            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[3].Elements[0]).Elements[0]).Content;
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[4].Elements[0]).Elements[0]).Content;
 
             Assert.That(content, Is.EqualTo("Ryan Carroll"));
         }
@@ -190,7 +190,8 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
                                                         a.Fullnames == fullnames &&
                                                         a.Days == days &&
                                                         a.Month == Month.January &&
-                                                        a.Year == 2019);
+                                                        a.Year == 2019 &&
+                                                        a.MaxNumberOfFullnames == 7);
 
             ILocalizedNames names = Mock.Of<ILocalizedNames>
                                    (n =>

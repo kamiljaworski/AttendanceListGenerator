@@ -10,7 +10,7 @@ namespace AttendanceListGenerator.Core.Pdf
         private readonly IAttendanceListData _data;
         private readonly ILocalizedNames _names;
 
-        private const int _numberOfTableColumns = 8;
+        private const int _numberOfAdditionalColumns = 2;
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
         {
@@ -49,25 +49,27 @@ namespace AttendanceListGenerator.Core.Pdf
             Table table = section.AddTable();
             table.Borders.Color = Colors.Black;
 
-            // Add columns
-            for (int i = 0; i < _numberOfTableColumns; ++i)
+            // Count number of columns in the table
+            int numberOfTableColumns = _data.MaxNumberOfFullnames + _numberOfAdditionalColumns;
+
+            // Add columns to the table
+            for (int i = 0; i < numberOfTableColumns; ++i)
                 table.AddColumn();
 
             // Add fullnames list to the table
             Row row = table.AddRow();
-            for (int i = 1; i < _numberOfTableColumns; ++i)
+            for (int i = 1; i < numberOfTableColumns; ++i)
             {
                 if (i <= _data.Fullnames.Count)
-                    row.Cells[i].AddParagraph(_data.Fullnames[i - 1]);
+                    row.Cells[i + 1].AddParagraph(_data.Fullnames[i - 1]);
             }
 
             // Add a row for each day
             foreach (IDay day in _data.Days)
             {
-                // Create day number formatted with dot at the end of number like: '1.', '2.', '21.'
-                string dayNumber = $"{day.DayOfMonth}.";
                 row = table.AddRow();
-                row.Cells[0].AddParagraph(dayNumber);
+                row.Cells[0].AddParagraph(day.FormattedDayOfMonth);
+
             }
 
 

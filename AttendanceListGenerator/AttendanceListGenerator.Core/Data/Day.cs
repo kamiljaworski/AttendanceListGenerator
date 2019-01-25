@@ -6,6 +6,7 @@ namespace AttendanceListGenerator.Core.Data
     {
         public int DayOfMonth { get; private set; }
         public DayOfWeek DayOfWeek { get; private set; }
+        public string FormattedDayOfMonth => $"{DayOfMonth}.";
 
         public Day(int dayOfMonth, DayOfWeek dayOfWeek)
         {

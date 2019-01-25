@@ -11,6 +11,7 @@ namespace AttendanceListGenerator.Core.Data
 
         public IList<IDay> Days { get; private set; }
         public IList<string> Fullnames { get; private set; }
+        public int MaxNumberOfFullnames => _maxNumberOfFullnames;
         public Month Month { get; private set; }
         public int Year { get; private set; }
 
