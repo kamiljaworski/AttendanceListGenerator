@@ -64,12 +64,12 @@ namespace AttendanceListGenerator.Core.Pdf
                     row.Cells[i + 1].AddParagraph(_data.Fullnames[i - 1]);
             }
 
-            // Add a row for each day
+            // Add a row for each day with day number and day of week abbreviation
             foreach (IDay day in _data.Days)
             {
                 row = table.AddRow();
                 row.Cells[0].AddParagraph(day.FormattedDayOfMonth);
-
+                row.Cells[1].AddParagraph(_names.GetDayOfWeekAbbreviation(day.DayOfWeek));
             }
 
 

@@ -136,7 +136,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidData_TablesFourthRowsFirstColumnIsEqualTo3()
+        public void GenerateDocument_PassValidData_TablesFourthRowsFirstColumnIsEqualTo4()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
@@ -147,42 +147,78 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             Assert.That(content, Is.EqualTo("4."));
         }
 
+        [Test]
+        public void GenerateDocument_PassValidData_TablesThirtySecondRowsFirstColumnIsEqualTo31()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[0].Elements[0]).Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("31."));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesFourthRowsSecondColumnIsEqualToFridayAbbreviation()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[1].Elements[0]).Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("Fri."));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesThirtySecondRowsSecondColumnIsEqualToThursdayAbbreviation()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[1].Elements[0]).Elements[0]).Content;
+
+            Assert.That(content, Is.EqualTo("Thu."));
+        }
+
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
         {
             IList<string> fullnames = new List<string> { "James Hunt", "William Jefferson", "Ryan Carroll" };
             IList<IDay> days = new List<IDay>
             {
-                Mock.Of<IDay>(d => d.DayOfMonth == 1 && d.DayOfWeek == DayOfWeek.Tuesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 2 && d.DayOfWeek == DayOfWeek.Wednesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 3 && d.DayOfWeek == DayOfWeek.Thursday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 4 && d.DayOfWeek == DayOfWeek.Friday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 5 && d.DayOfWeek == DayOfWeek.Saturday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 6 && d.DayOfWeek == DayOfWeek.Sunday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 7 && d.DayOfWeek == DayOfWeek.Monday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 8 && d.DayOfWeek == DayOfWeek.Tuesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 9 && d.DayOfWeek == DayOfWeek.Wednesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 10 && d.DayOfWeek == DayOfWeek.Thursday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 11 && d.DayOfWeek == DayOfWeek.Friday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 12 && d.DayOfWeek == DayOfWeek.Saturday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 13 && d.DayOfWeek == DayOfWeek.Sunday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 14 && d.DayOfWeek == DayOfWeek.Monday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 15 && d.DayOfWeek == DayOfWeek.Tuesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 16 && d.DayOfWeek == DayOfWeek.Wednesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 17 && d.DayOfWeek == DayOfWeek.Thursday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 18 && d.DayOfWeek == DayOfWeek.Friday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 19 && d.DayOfWeek == DayOfWeek.Saturday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 20 && d.DayOfWeek == DayOfWeek.Sunday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 21 && d.DayOfWeek == DayOfWeek.Monday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 22 && d.DayOfWeek == DayOfWeek.Tuesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 23 && d.DayOfWeek == DayOfWeek.Wednesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 24 && d.DayOfWeek == DayOfWeek.Thursday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 25 && d.DayOfWeek == DayOfWeek.Friday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 26 && d.DayOfWeek == DayOfWeek.Saturday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 27 && d.DayOfWeek == DayOfWeek.Sunday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 28 && d.DayOfWeek == DayOfWeek.Monday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 29 && d.DayOfWeek == DayOfWeek.Tuesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 30 && d.DayOfWeek == DayOfWeek.Wednesday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 31 && d.DayOfWeek == DayOfWeek.Thursday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 1 && d.FormattedDayOfMonth == "1." && d.DayOfWeek == DayOfWeek.Tuesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 2 && d.FormattedDayOfMonth == "2." && d.DayOfWeek == DayOfWeek.Wednesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 3 && d.FormattedDayOfMonth == "3." && d.DayOfWeek == DayOfWeek.Thursday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 4 && d.FormattedDayOfMonth == "4." && d.DayOfWeek == DayOfWeek.Friday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 5 && d.FormattedDayOfMonth == "5." && d.DayOfWeek == DayOfWeek.Saturday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 6 && d.FormattedDayOfMonth == "6." && d.DayOfWeek == DayOfWeek.Sunday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 7 && d.FormattedDayOfMonth == "7." && d.DayOfWeek == DayOfWeek.Monday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 8 && d.FormattedDayOfMonth == "8." && d.DayOfWeek == DayOfWeek.Tuesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 9 && d.FormattedDayOfMonth == "9." && d.DayOfWeek == DayOfWeek.Wednesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 10 && d.FormattedDayOfMonth == "10." && d.DayOfWeek == DayOfWeek.Thursday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 11 && d.FormattedDayOfMonth == "11." && d.DayOfWeek == DayOfWeek.Friday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 12 && d.FormattedDayOfMonth == "12." && d.DayOfWeek == DayOfWeek.Saturday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 13 && d.FormattedDayOfMonth == "13." && d.DayOfWeek == DayOfWeek.Sunday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 14 && d.FormattedDayOfMonth == "14." && d.DayOfWeek == DayOfWeek.Monday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 15 && d.FormattedDayOfMonth == "15." && d.DayOfWeek == DayOfWeek.Tuesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 16 && d.FormattedDayOfMonth == "16." && d.DayOfWeek == DayOfWeek.Wednesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 17 && d.FormattedDayOfMonth == "17." && d.DayOfWeek == DayOfWeek.Thursday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 18 && d.FormattedDayOfMonth == "18." && d.DayOfWeek == DayOfWeek.Friday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 19 && d.FormattedDayOfMonth == "19." && d.DayOfWeek == DayOfWeek.Saturday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 20 && d.FormattedDayOfMonth == "20." && d.DayOfWeek == DayOfWeek.Sunday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 21 && d.FormattedDayOfMonth == "21." && d.DayOfWeek == DayOfWeek.Monday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 22 && d.FormattedDayOfMonth == "22." && d.DayOfWeek == DayOfWeek.Tuesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 23 && d.FormattedDayOfMonth == "23." && d.DayOfWeek == DayOfWeek.Wednesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 24 && d.FormattedDayOfMonth == "24." && d.DayOfWeek == DayOfWeek.Thursday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 25 && d.FormattedDayOfMonth == "25." && d.DayOfWeek == DayOfWeek.Friday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 26 && d.FormattedDayOfMonth == "26." && d.DayOfWeek == DayOfWeek.Saturday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 27 && d.FormattedDayOfMonth == "27." && d.DayOfWeek == DayOfWeek.Sunday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 28 && d.FormattedDayOfMonth == "28." && d.DayOfWeek == DayOfWeek.Monday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 29 && d.FormattedDayOfMonth == "29." && d.DayOfWeek == DayOfWeek.Tuesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 30 && d.FormattedDayOfMonth == "30." && d.DayOfWeek == DayOfWeek.Wednesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 31 && d.FormattedDayOfMonth == "31." && d.DayOfWeek == DayOfWeek.Thursday),
             };
 
             IAttendanceListData stubAttendanceListData = Mock.Of<IAttendanceListData>
@@ -195,7 +231,14 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             ILocalizedNames names = Mock.Of<ILocalizedNames>
                                    (n =>
-                                    n.GetDocumentTitle(Month.January, 2019) == "Styczeń 2019");
+                                    n.GetDocumentTitle(Month.January, 2019) == "Styczeń 2019" &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Monday) == "Mon." &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Tuesday) == "Tue." &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Wednesday) == "Wed." &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Thursday) == "Thu." &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Friday) == "Fri." &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Saturday) == "Sat." &&
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Sunday) == "Sun.");
 
             return new AttendanceListDocumentGenerator(stubAttendanceListData, names);
         }

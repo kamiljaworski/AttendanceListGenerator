@@ -7,6 +7,7 @@ namespace AttendanceListGenerator.Core.Data
         string DocumentAuthor { get; }
         string DocumentComment { get; }
         string GetDayOfWeekName(DayOfWeek dayOfWeek);
+        string GetDayOfWeekAbbreviation(DayOfWeek dayOfWeek);
         string GetMonthName(Month month);
         string GetDocumentTitle(Month month, int Year);
     }
