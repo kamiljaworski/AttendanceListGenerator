@@ -35,6 +35,12 @@ namespace AttendanceListGenerator.Core.Pdf
             PageSetup setup = document.DefaultPageSetup.Clone();
             setup.Orientation = Orientation.Landscape;
 
+            // Change margins
+            setup.TopMargin = 30.0;
+            setup.BottomMargin = 30.0;
+            setup.LeftMargin = 30.0;
+            setup.RightMargin = 30.0;
+
             // Add a section to the document
             Section section = document.AddSection();
 
@@ -42,8 +48,8 @@ namespace AttendanceListGenerator.Core.Pdf
             section.PageSetup = setup;
 
             // Add a paragraph and title text
-            Paragraph paragraph = section.AddParagraph();
-            paragraph.AddText(_names.GetDocumentTitle(_data.Month, _data.Year));
+            Paragraph documentHeading = section.AddParagraph();
+            documentHeading.AddText(_names.GetDocumentTitle(_data.Month, _data.Year));
 
             // Add a table with black borders
             Table table = section.AddTable();
@@ -73,6 +79,36 @@ namespace AttendanceListGenerator.Core.Pdf
             }
 
 
+            // Change document heading format
+            documentHeading.Format.Font.Name = "Times New Roman";
+            documentHeading.Format.Alignment = ParagraphAlignment.Center;
+            documentHeading.Format.Font.Size = 18.0;
+            documentHeading.Format.Font.Bold = true;
+            documentHeading.Format.SpaceAfter = 15.0;
+
+            // Change first two columns width
+            table.Columns[0].Width = 25;
+            table.Columns[1].Width = 30;
+
+            // Change width of fullnames columns
+            for (int i = 0; i < _data.MaxNumberOfFullnames; i++)
+                table.Columns[i + 2].Width = 100;
+
+            // Remove first two columns borders
+            table.Rows[0].Cells[0].Borders.Top.Visible = false;
+            table.Rows[0].Cells[1].Borders.Top.Visible = false;
+            table.Rows[0].Cells[0].Borders.Left.Visible = false;
+            table.Rows[0].Cells[1].Borders.Left.Visible = false;
+            table.Rows[0].Cells[0].Borders.Right.Visible = false;
+            table.Rows[0].Cells[1].Borders.Right.Visible = false;
+
+            // Change table default font name and size
+            table.Format.Font.Name = "Times New Roman";
+            table.Format.Font.Size = 12.0;
+
+            // Change table headings font size and weight
+            table.Rows[0].Format.Font.Size = 14.0;
+            table.Rows[0].Format.Font.Bold = true;
 
 
             return document;

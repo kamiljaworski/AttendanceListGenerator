@@ -23,7 +23,7 @@ namespace AttendanceListGenerator.UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IAttendanceListData attendanceListData = new AttendanceListData(new List<string> { "test", "test" }, Month.February, 2019);
+            IAttendanceListData attendanceListData = new AttendanceListData(new List<string> { "James Hunt", "William Jefferson" }, Month.February, 2019);
             IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(attendanceListData, new TempLocalizedNames());
             Document document = documentGenerator.GenerateDocument();
             SaveDocument(document);
