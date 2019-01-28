@@ -65,7 +65,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             string content = ((Text)document.Sections[0].LastParagraph.Elements[0]).Content;
 
-            Assert.That(content, Is.EqualTo("Styczeń 2019"));
+            Assert.That(content, Is.EqualTo("January 2019"));
         }
 
         [Test]
@@ -141,8 +141,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
-            string content;
-            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[0].Elements[0]).Elements[0]).Content;
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[0].Elements[0]).Elements[0]).Content;
 
             Assert.That(content, Is.EqualTo("4."));
         }
@@ -153,8 +152,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
-            string content;
-            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[0].Elements[0]).Elements[0]).Content;
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[0].Elements[0]).Elements[0]).Content;
 
             Assert.That(content, Is.EqualTo("31."));
         }
@@ -165,8 +163,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
-            string content;
-            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[1].Elements[0]).Elements[0]).Content;
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[1].Elements[0]).Elements[0]).Content;
 
             Assert.That(content, Is.EqualTo("Fri."));
         }
@@ -177,10 +174,64 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
             Document document = documentGenerator.GenerateDocument();
 
-            string content;
-            content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[1].Elements[0]).Elements[0]).Content;
+            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[1].Elements[0]).Elements[0]).Content;
 
             Assert.That(content, Is.EqualTo("Thu."));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesHeadingBackgroundColorIsValid()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[0].Shading.Color;
+
+            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.FullnamesBackgroundColor));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesSunday13ThJanuaryColorIsValid()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[13].Shading.Color;
+
+            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SundayBackgroundColor));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesSaturday19ThJanuaryColorIsValid()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[19].Shading.Color;
+
+            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SaturdayBackgroundColor));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesEvenDay10thJanuaryColorIsValid()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[10].Shading.Color;
+
+            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.EvenDayBackgroundColor));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesOddDay9thJanuaryColorIsValid()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[9].Shading.Color;
+
+            Assert.That(backgroundColor.RGB, Is.EqualTo(0));
         }
 
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
@@ -231,14 +282,15 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             ILocalizedNames names = Mock.Of<ILocalizedNames>
                                    (n =>
-                                    n.GetDocumentTitle(Month.January, 2019) == "Styczeń 2019" &&
+                                    n.GetDocumentTitle(Month.January, 2019) == "January 2019" &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Monday) == "Mon." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Tuesday) == "Tue." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Wednesday) == "Wed." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Thursday) == "Thu." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Friday) == "Fri." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Saturday) == "Sat." &&
-                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Sunday) == "Sun.");
+                                    n.GetDayOfWeekAbbreviation(DayOfWeek.Sunday) == "Sun." &&
+                                    n.GetDayOfWeekName(DayOfWeek.Sunday) == "Sunday");
 
             return new AttendanceListDocumentGenerator(stubAttendanceListData, names);
         }

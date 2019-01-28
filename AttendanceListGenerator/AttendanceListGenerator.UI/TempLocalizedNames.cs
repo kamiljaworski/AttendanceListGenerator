@@ -33,10 +33,7 @@ namespace AttendanceListGenerator.UI
             }
         }
 
-        public string GetDayOfWeekName(DayOfWeek dayOfWeek)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetDayOfWeekName(DayOfWeek dayOfWeek) => "Niedziela";
 
         public string GetDocumentTitle(Month month, int Year) => "Luty 2019";
 

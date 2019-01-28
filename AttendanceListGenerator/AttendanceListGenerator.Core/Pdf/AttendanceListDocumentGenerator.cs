@@ -12,6 +12,12 @@ namespace AttendanceListGenerator.Core.Pdf
 
         private const int _numberOfAdditionalColumns = 2;
 
+        public Color FullnamesBackgroundColor { get; set; } = new Color(220, 220, 220);
+        public Color SundayBackgroundColor { get; set; } = new Color(192, 192, 192);
+        public Color SaturdayBackgroundColor { get; set; } = new Color(215, 215, 215);
+        public Color EvenDayBackgroundColor { get; set; } = new Color(241, 241, 241);
+
+
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
         {
             if (data == null || names == null)
@@ -70,12 +76,40 @@ namespace AttendanceListGenerator.Core.Pdf
                     row.Cells[i + 1].AddParagraph(_data.Fullnames[i - 1]);
             }
 
+            // Set background color of fullnames row to gray
+            row.Shading.Color = FullnamesBackgroundColor;
+
+            // Reset first and second column background color
+            row.Cells[0].Shading.Color = Colors.White;
+            row.Cells[1].Shading.Color = Colors.White;
+
             // Add a row for each day with day number and day of week abbreviation
             foreach (IDay day in _data.Days)
             {
                 row = table.AddRow();
                 row.Cells[0].AddParagraph(day.FormattedDayOfMonth);
                 row.Cells[1].AddParagraph(_names.GetDayOfWeekAbbreviation(day.DayOfWeek));
+
+                if (day.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    row.Shading.Color = SundayBackgroundColor;
+
+                    for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
+                    {
+                        row.Cells[i + 2].AddParagraph(_names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper());
+                        row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
+
+                    }
+                }
+                else if (day.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    row.Shading.Color = SaturdayBackgroundColor;
+                }
+                else if (day.DayOfMonth % 2 == 0)
+                {
+                    row.Shading.Color = EvenDayBackgroundColor;
+                }
+
             }
 
 
