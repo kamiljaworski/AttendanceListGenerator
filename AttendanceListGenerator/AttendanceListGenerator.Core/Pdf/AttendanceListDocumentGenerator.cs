@@ -15,8 +15,6 @@ namespace AttendanceListGenerator.Core.Pdf
         public Color FullnamesBackgroundColor { get; set; } = new Color(220, 220, 220);
         public Color SundayBackgroundColor { get; set; } = new Color(192, 192, 192);
         public Color SaturdayBackgroundColor { get; set; } = new Color(215, 215, 215);
-        public Color EvenDayBackgroundColor { get; set; } = new Color(241, 241, 241);
-
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
         {
@@ -90,28 +88,23 @@ namespace AttendanceListGenerator.Core.Pdf
                 row.Cells[0].AddParagraph(day.FormattedDayOfMonth);
                 row.Cells[1].AddParagraph(_names.GetDayOfWeekAbbreviation(day.DayOfWeek));
 
+                // Change background color of a row depending on a day of week
                 if (day.DayOfWeek == DayOfWeek.Sunday)
                 {
                     row.Shading.Color = SundayBackgroundColor;
 
+                    // If day is Sunday then add to all columns this day's name
                     for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
                     {
                         row.Cells[i + 2].AddParagraph(_names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper());
                         row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
-
                     }
                 }
                 else if (day.DayOfWeek == DayOfWeek.Saturday)
                 {
                     row.Shading.Color = SaturdayBackgroundColor;
                 }
-                else if (day.DayOfMonth % 2 == 0)
-                {
-                    row.Shading.Color = EvenDayBackgroundColor;
-                }
-
             }
-
 
             // Change document heading format
             documentHeading.Format.Font.Name = "Times New Roman";

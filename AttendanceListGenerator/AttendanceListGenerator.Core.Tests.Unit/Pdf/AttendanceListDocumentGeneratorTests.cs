@@ -212,28 +212,6 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SaturdayBackgroundColor));
         }
 
-        [Test]
-        public void GenerateDocument_PassValidDataWith_TablesEvenDay10thJanuaryColorIsValid()
-        {
-            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-            Document document = documentGenerator.GenerateDocument();
-
-            Color backgroundColor = document.Sections[0].LastTable.Rows[10].Shading.Color;
-
-            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.EvenDayBackgroundColor));
-        }
-
-        [Test]
-        public void GenerateDocument_PassValidDataWith_TablesOddDay9thJanuaryColorIsValid()
-        {
-            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-            Document document = documentGenerator.GenerateDocument();
-
-            Color backgroundColor = document.Sections[0].LastTable.Rows[9].Shading.Color;
-
-            Assert.That(backgroundColor.RGB, Is.EqualTo(0));
-        }
-
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
         {
             IList<string> fullnames = new List<string> { "James Hunt", "William Jefferson", "Ryan Carroll" };
