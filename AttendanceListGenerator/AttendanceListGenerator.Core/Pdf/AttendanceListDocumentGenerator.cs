@@ -17,6 +17,7 @@ namespace AttendanceListGenerator.Core.Pdf
         private const int _firstColumnWidth = 25;
         private const int _secondColumnWidth = 30;
 
+        public bool CanAddColorsToTheDocument { get; set; } = true;
         public Color FullnamesBackgroundColor { get; set; } = new Color(220, 220, 220);
         public Color SundayBackgroundColor { get; set; } = new Color(192, 192, 192);
         public Color SaturdayBackgroundColor { get; set; } = new Color(215, 215, 215);
@@ -42,7 +43,8 @@ namespace AttendanceListGenerator.Core.Pdf
             ChangeDocumentHeadingFormat(documentHeading);
             ChangeTableFormat(table);
 
-            AddColorsToTheTable(table);
+            if (CanAddColorsToTheDocument)
+                AddColorsToTheTable(table);
 
             return document;
         }

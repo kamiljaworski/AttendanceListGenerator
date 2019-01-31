@@ -158,7 +158,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidDataWith_TablesFourthRowsSecondColumnIsEqualToFridayAbbreviation()
+        public void GenerateDocument_PassValidData_TablesFourthRowsSecondColumnIsEqualToFridayAbbreviation()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
 
@@ -169,7 +169,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidDataWith_TablesThirtySecondRowsSecondColumnIsEqualToThursdayAbbreviation()
+        public void GenerateDocument_PassValidData_TablesThirtySecondRowsSecondColumnIsEqualToThursdayAbbreviation()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
 
@@ -180,7 +180,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidDataWith_TablesHeadingBackgroundColorIsValid()
+        public void GenerateDocument_PassValidData_TablesHeadingBackgroundColorIsValid()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
 
@@ -191,7 +191,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidDataWith_TablesSunday13ThJanuaryColorIsValid()
+        public void GenerateDocument_PassValidData_TablesSunday13ThJanuaryColorIsValid()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
 
@@ -202,7 +202,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidDataWith_TablesSaturday19ThJanuaryColorIsValid()
+        public void GenerateDocument_PassValidData_TablesSaturday19ThJanuaryColorIsValid()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
 
@@ -210,6 +210,42 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             Color backgroundColor = document.Sections[0].LastTable.Rows[19].Shading.Color;
             Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SaturdayBackgroundColor));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWithFalseAddColorsProperty_TablesHeadingBackgroundColorIsZero()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.CanAddColorsToTheDocument = false;
+
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[0].Shading.Color;
+            Assert.That(backgroundColor.RGB, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWithFalseAddColorsProperty_TablesSunday13ThJanuaryColorIsZero()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.CanAddColorsToTheDocument = false;
+
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[13].Shading.Color;
+            Assert.That(backgroundColor.RGB, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWithFalseAddColorsProperty_TablesSaturday19ThJanuaryColorIsZero()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.CanAddColorsToTheDocument = false;
+
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[19].Shading.Color;
+            Assert.That(backgroundColor.RGB, Is.EqualTo(0));
         }
 
         [Test]

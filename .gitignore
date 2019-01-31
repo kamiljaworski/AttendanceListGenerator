@@ -259,3 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/AttendanceListGenerator/.axoCover/runs/run_2019-01-31_17-52-37/coverageReport.xml
