@@ -122,11 +122,17 @@ namespace AttendanceListGenerator.Core.Pdf
         {
             // Add fullnames list to the table
             Row row = table.AddRow();
-            for (int i = 1; i < numberOfColumns; ++i)
-            {
-                if (i <= _data.Fullnames.Count)
-                    row.Cells[i + 1].AddParagraph(_data.Fullnames[i - 1]);
-            }
+            for (int i = 2; i <= numberOfColumns; ++i)
+                if (i - 2 < _data.People.Count)
+                    AddFullnameToTheCell(row, i, _data.People[i - 2]);
+        }
+
+        private void AddFullnameToTheCell(Row row, int index, IPerson person)
+        {
+            // Add line break between first and last name
+            string fullname = person.FirstName + "\n" + person.LastName;
+
+            row.Cells[index].AddParagraph(fullname);
         }
 
         private void AddDayToTheTable(Table table, IDay day)

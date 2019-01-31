@@ -10,15 +10,15 @@ namespace AttendanceListGenerator.Core.Data
         private const int _maxNumberOfFullnames = 7;
 
         public IList<IDay> Days { get; private set; }
-        public IList<string> Fullnames { get; private set; }
+        public IList<IPerson> People { get; private set; }
         public int MaxNumberOfFullnames => _maxNumberOfFullnames;
         public Month Month { get; private set; }
         public int Year { get; private set; }
 
-        public AttendanceListData(IList<string> fullnames, Month month, int year)
+        public AttendanceListData(IList<IPerson> people, Month month, int year)
         {
-            if (fullnames == null || fullnames.Count < _minNumberOfFullnames || fullnames.Count > _maxNumberOfFullnames)
-                throw new ArgumentException("Fullnames list should contain at least 1 fullname and at most 7");
+            if (people == null || people.Count < _minNumberOfFullnames || people.Count > _maxNumberOfFullnames)
+                throw new ArgumentException("People list should contain at least 1 person and at most 7");
 
             if(month == Month.None)
                 throw new ArgumentException("Month cannot be 'None'");
@@ -27,7 +27,7 @@ namespace AttendanceListGenerator.Core.Data
                 throw new ArgumentOutOfRangeException("Year should be between 1900 and 2100");
 
 
-            Fullnames = fullnames;
+            People = people;
             Days = new List<IDay>(_maxNumberOfDaysInAMonth);
             Month = month;
             Year = year;

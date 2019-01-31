@@ -97,8 +97,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             Document document = documentGenerator.GenerateDocument();
 
-            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[2].Elements[0]).Elements[0]).Content;
-            Assert.That(content, Is.EqualTo("James Hunt"));
+            string firstName = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[2].Elements[0]).Elements[0]).Content;
+            string lastName = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[2].Elements[0]).Elements[2]).Content;
+            Assert.That(firstName, Is.EqualTo("James"));
+            Assert.That(lastName, Is.EqualTo("Hunt"));
         }
 
         [Test]
@@ -108,8 +110,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             Document document = documentGenerator.GenerateDocument();
 
-            string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[4].Elements[0]).Elements[0]).Content;
-            Assert.That(content, Is.EqualTo("Ryan Carroll"));
+            string firstName = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[4].Elements[0]).Elements[0]).Content;
+            string lastName = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[4].Elements[0]).Elements[2]).Content;
+            Assert.That(firstName, Is.EqualTo("Ryan"));
+            Assert.That(lastName, Is.EqualTo("Carroll"));
         }
 
         [Test]
@@ -268,7 +272,13 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
         {
-            IList<string> fullnames = new List<string> { "James Hunt", "William Jefferson", "Ryan Carroll" };
+            IList<IPerson> people = new List<IPerson>
+            {
+                Mock.Of<IPerson>(p => p.FirstName == "James" && p.LastName == "Hunt"),
+                Mock.Of<IPerson>(p => p.FirstName == "William" && p.LastName == "Jefferson"),
+                Mock.Of<IPerson>(p => p.FirstName == "Ryan" && p.LastName == "Carroll")
+            };
+
             IList<IDay> days = new List<IDay>
             {
                 Mock.Of<IDay>(d => d.DayOfMonth == 1 && d.FormattedDayOfMonth == "1." && d.DayOfWeek == DayOfWeek.Tuesday),
@@ -306,7 +316,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             IAttendanceListData stubAttendanceListData = Mock.Of<IAttendanceListData>
                                                        (a =>
-                                                        a.Fullnames == fullnames &&
+                                                        a.People == people &&
                                                         a.Days == days &&
                                                         a.Month == Month.January &&
                                                         a.Year == 2019 &&

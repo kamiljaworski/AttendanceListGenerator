@@ -1,4 +1,5 @@
 ﻿using AttendanceListGenerator.Core.Data;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(Month.December)]
         public void Constructor_PassValidMonth_MonthIsEqualToGivenMonth(Month month)
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), month, 2019);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), month, 2019);
 
             Assert.That(monthData.Month, Is.EqualTo(month));
         }
@@ -25,37 +26,47 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2010)]
         public void Constructor_PassValidYear_YearIsEqualToGivenYear(int year)
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.January, year);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.January, year);
 
             Assert.That(monthData.Year, Is.EqualTo(year));
         }
 
         [Test]
-        public void Constructor_PassValidFullnamesList_FullnamesListIsEqualToGivenList()
+        public void Constructor_PassValidPeopleList_FullnamesListIsEqualToGivenList()
         {
-            IList<string> fullnames = GetListOfFullnames();
+            IList<IPerson> people = GetListOfPeople();
 
-            AttendanceListData monthData = new AttendanceListData(fullnames, Month.January, 2019);
+            AttendanceListData monthData = new AttendanceListData(people, Month.January, 2019);
 
-            Assert.That(monthData.Fullnames, Is.EqualTo(fullnames));
+            Assert.That(monthData.People, Is.EqualTo(people));
         }
 
         [Test]
-        public void Constructor_PassEmptyFullnamesList_ThrowsArgumentException()
+        public void Constructor_PassEmptyPeopleList_ThrowsArgumentException()
         {
-            IList<string> fullnames = new List<string>();
+            IList<IPerson> people = new List<IPerson>();
 
-            TestDelegate constructor = () => new AttendanceListData(fullnames, Month.January, 2019);
+            TestDelegate constructor = () => new AttendanceListData(people, Month.January, 2019);
 
             Assert.That(constructor, Throws.ArgumentException);
         }
 
         [Test]
-        public void Constructor_PassListOf8Fullnames_ThrowsArgumentException()
+        public void Constructor_PassListOf8People_ThrowsArgumentException()
         {
-            IList<string> fullnames = new List<string> { "aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg", "hhh" };
+            IList<IPerson> people = new List<IPerson>
+            {
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>(),
+                Mock.Of<IPerson>()
+            };
 
-            TestDelegate constructor = () => new AttendanceListData(fullnames, Month.January, 2019);
+            TestDelegate constructor = () => new AttendanceListData(people, Month.January, 2019);
 
             Assert.That(constructor, Throws.ArgumentException);
         }
@@ -63,17 +74,17 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassMonthNone_ThrowsArgumentException()
         {
-            TestDelegate constructor = () => new AttendanceListData(GetListOfFullnames(), Month.None, 2019);
+            TestDelegate constructor = () => new AttendanceListData(GetListOfPeople(), Month.None, 2019);
 
             Assert.That(constructor, Throws.ArgumentException);
         }
 
         [Test]
-        public void Constructor_PassNullFullnamesList_ThrowsArgumentException()
+        public void Constructor_PassNullPeopleList_ThrowsArgumentException()
         {
-            IList<string> fullnames = null;
+            IList<IPerson> people = null;
 
-            TestDelegate constructor = () => new AttendanceListData(fullnames, Month.January, 2019);
+            TestDelegate constructor = () => new AttendanceListData(people, Month.January, 2019);
 
             Assert.That(constructor, Throws.ArgumentException);
         }
@@ -86,7 +97,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2500)]
         public void Constructor_PassYearLessThan1900OrAbove2100_ThrowArgumentOutOfRangeException(int year)
         {
-            TestDelegate constructor = () => new AttendanceListData(GetListOfFullnames(), Month.January, year);
+            TestDelegate constructor = () => new AttendanceListData(GetListOfPeople(), Month.January, year);
 
             Assert.That(constructor, Throws.InstanceOf<ArgumentOutOfRangeException>());
         }
@@ -95,7 +106,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2100)]
         public void Constructor_PassYear1900And2100_DoNotThrowArgumentOutOfRangeException(int year)
         {
-            TestDelegate constructor = () => new AttendanceListData(GetListOfFullnames(), Month.January, year);
+            TestDelegate constructor = () => new AttendanceListData(GetListOfPeople(), Month.January, year);
 
             Assert.That(constructor, Throws.Nothing);
         }
@@ -103,7 +114,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2019_CreateListOf28Days()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2019);
 
             Assert.That(monthData.Days.Count, Is.EqualTo(28));
         }
@@ -111,7 +122,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2019_ListOfDaysDoNotContainAnyNull()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2019);
 
             CollectionAssert.AllItemsAreNotNull(monthData.Days);
         }
@@ -119,7 +130,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2019_FirstDayInFebruaryIsFriday()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2019);
             IDay firstDay = monthData.Days.FirstOrDefault();
 
             Assert.That(firstDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Friday));
@@ -128,7 +139,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2019_LastDayInFebruaryIsThursday()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2019);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2019);
             IDay lastDay = monthData.Days.LastOrDefault();
 
             Assert.That(lastDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Thursday));
@@ -137,7 +148,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2020LeapYear_CreateListOf29Days()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2020);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2020);
 
             Assert.That(monthData.Days.Count, Is.EqualTo(29));
         }
@@ -145,7 +156,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2020LeapYear_FirstDayIsSaturday()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2020);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2020);
             IDay firstDay = monthData.Days.FirstOrDefault();
 
             Assert.That(firstDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Saturday));
@@ -154,7 +165,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassFebruary2020LeapYear_LastDayIsSaturday()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.February, 2020);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.February, 2020);
             IDay lastDay = monthData.Days.LastOrDefault();
 
             Assert.That(lastDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Saturday));
@@ -163,7 +174,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassAugust2024_CreateListOf31Days()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.August, 2024);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.August, 2024);
 
             Assert.That(monthData.Days.Count, Is.EqualTo(31));
         }
@@ -171,7 +182,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassAugust2024_FirstDayIsThursday()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.August, 2024);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.August, 2024);
             IDay firstDay = monthData.Days.FirstOrDefault();
 
             Assert.That(firstDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Thursday));
@@ -180,16 +191,22 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [Test]
         public void Constructor_PassAugust2024_LastDayIsSaturday()
         {
-            AttendanceListData monthData = new AttendanceListData(GetListOfFullnames(), Month.August, 2024);
+            AttendanceListData monthData = new AttendanceListData(GetListOfPeople(), Month.August, 2024);
             IDay lastDay = monthData.Days.LastOrDefault();
 
             Assert.That(lastDay.DayOfWeek, Is.Not.Null.And.EqualTo(DayOfWeek.Saturday));
 
         }
 
-        private IList<string> GetListOfFullnames()
+        private IList<IPerson> GetListOfPeople()
         {
-            return new List<string> { "James Hunt", "William Jefferson", "Ryan Carroll" };
+            return new List<IPerson>
+            {
+                Mock.Of<IPerson>(p => p.FirstName == "James" && p.LastName == "Hunt"),
+                Mock.Of<IPerson>(p => p.FirstName == "William" && p.LastName == "Jefferson"),
+                Mock.Of<IPerson>(p => p.FirstName == "Ryan" && p.LastName == "Carroll")
+            };
+
         }
     }
 }
