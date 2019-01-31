@@ -38,11 +38,11 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         [Test]
         public void GenerateDocument_PassValidData_GeneratesDocumentWithOneSection()
         {
-            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator(); ;
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             int numberOfSections = document.Sections.Count;
-
             Assert.That(numberOfSections, Is.EqualTo(1));
         }
 
@@ -50,10 +50,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_GeneratesDocumentWithLandscapeSectionOrientation()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             Orientation orientation = document.Sections[0].PageSetup.Orientation;
-
             Assert.That(orientation, Is.EqualTo(Orientation.Landscape));
         }
 
@@ -61,10 +61,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_GeneratesParagraphWithMonthNameAndYearInTheSection()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)document.Sections[0].LastParagraph.Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("January 2019"));
         }
 
@@ -72,10 +72,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_GeneratesTable()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             Table table = document.Sections[0].LastTable;
-
             Assert.That(table, Is.Not.Null);
         }
 
@@ -83,10 +83,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_GeneratesTableWith9Columns()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             int numberOfColumns = document.Sections[0].LastTable.Columns.Count;
-
             Assert.That(numberOfColumns, Is.EqualTo(9));
         }
 
@@ -94,10 +94,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_TablesFirstFullnameIsEqualToPassedFullname()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[2].Elements[0]).Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("James Hunt"));
         }
 
@@ -105,10 +105,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_TablesThirdFullnameIsEqualToPassedFullname()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[4].Elements[0]).Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("Ryan Carroll"));
         }
 
@@ -116,11 +116,11 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_TablesFourthFullnameDoesNotExistAndThrowsException()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content;
             TestDelegate getContent = () => content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[0].Cells[6].Elements[0]).Elements[0]).Content;
-
             Assert.That(getContent, Throws.InstanceOf<ArgumentOutOfRangeException>());
         }
 
@@ -128,10 +128,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_GeneratesTableWith32Rows()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             int numberOfRows = document.Sections[0].LastTable.Rows.Count;
-
             Assert.That(numberOfRows, Is.EqualTo(32));
         }
 
@@ -139,10 +139,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_TablesFourthRowsFirstColumnIsEqualTo4()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[0].Elements[0]).Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("4."));
         }
 
@@ -150,10 +150,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidData_TablesThirtySecondRowsFirstColumnIsEqualTo31()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[0].Elements[0]).Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("31."));
         }
 
@@ -161,10 +161,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidDataWith_TablesFourthRowsSecondColumnIsEqualToFridayAbbreviation()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[4].Cells[1].Elements[0]).Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("Fri."));
         }
 
@@ -172,10 +172,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidDataWith_TablesThirtySecondRowsSecondColumnIsEqualToThursdayAbbreviation()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             string content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[31].Cells[1].Elements[0]).Elements[0]).Content;
-
             Assert.That(content, Is.EqualTo("Thu."));
         }
 
@@ -183,10 +183,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidDataWith_TablesHeadingBackgroundColorIsValid()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             Color backgroundColor = document.Sections[0].LastTable.Rows[0].Shading.Color;
-
             Assert.That(backgroundColor, Is.EqualTo(documentGenerator.FullnamesBackgroundColor));
         }
 
@@ -194,10 +194,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidDataWith_TablesSunday13ThJanuaryColorIsValid()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             Color backgroundColor = document.Sections[0].LastTable.Rows[13].Shading.Color;
-
             Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SundayBackgroundColor));
         }
 
@@ -205,11 +205,29 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_PassValidDataWith_TablesSaturday19ThJanuaryColorIsValid()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
             Document document = documentGenerator.GenerateDocument();
 
             Color backgroundColor = document.Sections[0].LastTable.Rows[19].Shading.Color;
-
             Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SaturdayBackgroundColor));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidDataWith_TablesSunday20thJanuaryAllColumnsHadSundayText()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
+            Document document = documentGenerator.GenerateDocument();
+
+            string firstColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[2].Elements[0]).Elements[0]).Content;
+            string secondColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[3].Elements[0]).Elements[0]).Content;
+            string thirdColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[4].Elements[0]).Elements[0]).Content;
+            string fourthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[5].Elements[0]).Elements[0]).Content;
+            string fifthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[6].Elements[0]).Elements[0]).Content;
+            string sixthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[7].Elements[0]).Elements[0]).Content;
+            string seventhColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[8].Elements[0]).Elements[0]).Content;
+            List<string> columnsList = new List<string> { firstColumn, secondColumn, thirdColumn, fourthColumn, fifthColumn, sixthColumn, seventhColumn };
+            Assert.That(columnsList, Is.All.EqualTo("SUNDAY"));
         }
 
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
