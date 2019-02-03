@@ -62,10 +62,13 @@
   <ItemGroup>
     <Compile Include="Data\AttendanceListData.cs" />
     <Compile Include="Data\Day.cs" />
+    <Compile Include="Data\DayOff.cs" />
     <Compile Include="Data\DayOfWeekNavigator.cs" />
     <Compile Include="Data\Holiday.cs" />
     <Compile Include="Data\IAttendanceListData.cs" />
     <Compile Include="Data\IDay.cs" />
+    <Compile Include="Data\IDayOff.cs" />
+    <Compile Include="Data\IDaysOffList.cs" />
     <Compile Include="Data\ILocalizedNames.cs" />
     <Compile Include="Data\IPerson.cs" />
     <Compile Include="Data\Month.cs" />
