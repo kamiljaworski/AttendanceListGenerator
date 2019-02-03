@@ -63,6 +63,7 @@
     <Compile Include="Data\AttendanceListData.cs" />
     <Compile Include="Data\Day.cs" />
     <Compile Include="Data\DayOfWeekNavigator.cs" />
+    <Compile Include="Data\Holiday.cs" />
     <Compile Include="Data\IAttendanceListData.cs" />
     <Compile Include="Data\IDay.cs" />
     <Compile Include="Data\ILocalizedNames.cs" />
