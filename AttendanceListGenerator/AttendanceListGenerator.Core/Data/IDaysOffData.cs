@@ -2,10 +2,9 @@
 
 namespace AttendanceListGenerator.Core.Data
 {
-    public interface IDaysOffList
+    public interface IDaysOffData
     {
-        IList<IDayOff> AllDaysOff { get; }
-
+        IList<IDayOff> DaysOff { get; }
         IList<IDayOff> GetDaysOff(Month month);
     }
 }
