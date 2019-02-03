@@ -69,7 +69,5 @@ namespace AttendanceListGenerator.Core.Data
 
             return new DateTime(year, month, day);
         }
-
-
     }
 }
