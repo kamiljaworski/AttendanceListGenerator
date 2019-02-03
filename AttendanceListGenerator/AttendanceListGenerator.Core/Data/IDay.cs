@@ -7,6 +7,6 @@ namespace AttendanceListGenerator.Core.Data
         int DayOfMonth { get; }
         string FormattedDayOfMonth { get; }
         DayOfWeek DayOfWeek { get; }
-        // TODO: days off
+        Holiday Holiday { get; }
     }
 }
