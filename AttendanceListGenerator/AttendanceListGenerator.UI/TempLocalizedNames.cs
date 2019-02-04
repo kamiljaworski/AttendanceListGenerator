@@ -37,6 +37,11 @@ namespace AttendanceListGenerator.UI
 
         public string GetDocumentTitle(Month month, int Year) => "Luty 2019";
 
+        public string GetHolidayName(Holiday holiday)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetMonthName(Month month)
         {
             throw new NotImplementedException();

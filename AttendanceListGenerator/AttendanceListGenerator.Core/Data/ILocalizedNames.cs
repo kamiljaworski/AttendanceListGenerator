@@ -9,5 +9,6 @@ namespace AttendanceListGenerator.Core.Data
         string GetDayOfWeekAbbreviation(DayOfWeek dayOfWeek);
         string GetMonthName(Month month);
         string GetDocumentTitle(Month month, int Year);
+        string GetHolidayName(Holiday holiday);
     }
 }

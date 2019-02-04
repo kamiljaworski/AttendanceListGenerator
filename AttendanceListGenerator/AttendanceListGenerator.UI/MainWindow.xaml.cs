@@ -29,7 +29,7 @@ namespace AttendanceListGenerator.UI
                 new Person ("William", "Jefferson")
             };
 
-            IAttendanceListData attendanceListData = new AttendanceListData(people, Month.February, 2019);
+            IAttendanceListData attendanceListData = new AttendanceListData(new DaysOffData(2019), people, Month.February, 2019);
             IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(attendanceListData, new TempLocalizedNames());
             Document document = documentGenerator.GenerateDocument();
             SaveDocument(document);
