@@ -19,7 +19,7 @@ namespace AttendanceListGenerator.Core.Pdf
 
         public bool CanAddColorsToTheDocument { get; set; } = true;
         public Color FullnamesBackgroundColor { get; set; } = new Color(220, 220, 220);
-        public Color SundayBackgroundColor { get; set; } = new Color(192, 192, 192);
+        public Color DayOffBackgroundColor { get; set; } = new Color(192, 192, 192);
         public Color SaturdayBackgroundColor { get; set; } = new Color(215, 215, 215);
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
@@ -233,17 +233,17 @@ namespace AttendanceListGenerator.Core.Pdf
             firstRow.Cells[1].Shading.Color = Colors.White;
 
             // Get a list of saturdays and sundays
-            var weekendDays = _data.Days.Where(d => d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday);
+            var weekendDays = _data.Days.Where(d => d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday || d.Holiday != Holiday.None);
 
             // Change rows background depend if its saturday or sunday
             foreach (IDay day in weekendDays)
             {
                 Row row = table.Rows[day.DayOfMonth];
 
-                if (day.DayOfWeek == DayOfWeek.Saturday)
-                    row.Shading.Color = SaturdayBackgroundColor;
+                if (day.DayOfWeek == DayOfWeek.Sunday || day.Holiday != Holiday.None)
+                    row.Shading.Color = DayOffBackgroundColor;
                 else
-                    row.Shading.Color = SundayBackgroundColor;
+                    row.Shading.Color = SaturdayBackgroundColor;
             }
         }
         #endregion

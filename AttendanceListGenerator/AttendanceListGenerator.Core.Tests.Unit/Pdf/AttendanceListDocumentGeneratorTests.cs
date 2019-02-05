@@ -202,7 +202,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             Document document = documentGenerator.GenerateDocument();
 
             Color backgroundColor = document.Sections[0].LastTable.Rows[13].Shading.Color;
-            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.SundayBackgroundColor));
+            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.DayOffBackgroundColor));
         }
 
         [Test]
@@ -306,6 +306,17 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             List<string> epiphanyList = new List<string> { secondColumn, fourthColumn, sixthColumn };
             Assert.That(sundayList, Is.All.EqualTo("SUNDAY"));
             Assert.That(epiphanyList, Is.All.EqualTo("EPIPHANY"));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_TablesSunday1stJanuaryColorIsValid()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
+            Document document = documentGenerator.GenerateDocument();
+
+            Color backgroundColor = document.Sections[0].LastTable.Rows[1].Shading.Color;
+            Assert.That(backgroundColor, Is.EqualTo(documentGenerator.DayOffBackgroundColor));
         }
 
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()

@@ -6,7 +6,7 @@ namespace AttendanceListGenerator.Core.Pdf
     {
         bool CanAddColorsToTheDocument { get; set; }
         Color FullnamesBackgroundColor { get; set; }
-        Color SundayBackgroundColor { get; set; }
+        Color DayOffBackgroundColor { get; set; }
         Color SaturdayBackgroundColor { get; set; }
 
         Document GenerateDocument();
