@@ -39,7 +39,10 @@ namespace AttendanceListGenerator.UI
 
         public string GetHolidayName(Holiday holiday)
         {
-            throw new NotImplementedException();
+            if (holiday == Holiday.NewYearsDay)
+                return "Nowy Rok";
+
+            return "Trzech Króli";
         }
 
         public string GetMonthName(Month month)
