@@ -253,7 +253,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         }
 
         [Test]
-        public void GenerateDocument_PassValidDataWith_TablesSunday20thJanuaryAllColumnsHadSundayText()
+        public void GenerateDocument_PassValidData_TablesSunday20thJanuaryAllColumnsHadSundayText()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
 
@@ -270,6 +270,44 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             Assert.That(columnsList, Is.All.EqualTo("SUNDAY"));
         }
 
+        [Test]
+        public void GenerateDocument_PassValidData_1stJanuaryColumnsContainNewYearsDayName()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
+            Document document = documentGenerator.GenerateDocument();
+
+            string firstColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[2].Elements[0]).Elements[0]).Content;
+            string secondColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[3].Elements[0]).Elements[0]).Content;
+            string thirdColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[4].Elements[0]).Elements[0]).Content;
+            string fourthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[5].Elements[0]).Elements[0]).Content;
+            string fifthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[6].Elements[0]).Elements[0]).Content;
+            string sixthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[7].Elements[0]).Elements[0]).Content;
+            string seventhColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[8].Elements[0]).Elements[0]).Content;
+            List<string> columnsList = new List<string> { firstColumn, secondColumn, thirdColumn, fourthColumn, fifthColumn, sixthColumn, seventhColumn };
+            Assert.That(columnsList, Is.All.EqualTo("NEW YEARS DAY"));
+        }
+
+        [Test]
+        public void GenerateDocument_PassValidData_6thJanuaryColumnsContainEpiphanyAndSundayName()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+
+            Document document = documentGenerator.GenerateDocument();
+
+            string firstColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[2].Elements[0]).Elements[0]).Content;
+            string secondColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[3].Elements[0]).Elements[0]).Content;
+            string thirdColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[4].Elements[0]).Elements[0]).Content;
+            string fourthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[5].Elements[0]).Elements[0]).Content;
+            string fifthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[6].Elements[0]).Elements[0]).Content;
+            string sixthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[7].Elements[0]).Elements[0]).Content;
+            string seventhColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[8].Elements[0]).Elements[0]).Content;
+            List<string> sundayList = new List<string> { firstColumn, thirdColumn, fifthColumn, seventhColumn };
+            List<string> epiphanyList = new List<string> { secondColumn, fourthColumn, sixthColumn };
+            Assert.That(sundayList, Is.All.EqualTo("SUNDAY"));
+            Assert.That(epiphanyList, Is.All.EqualTo("EPIPHANY"));
+        }
+
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
         {
             IList<IPerson> people = new List<IPerson>
@@ -281,12 +319,12 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
 
             IList<IDay> days = new List<IDay>
             {
-                Mock.Of<IDay>(d => d.DayOfMonth == 1 && d.FormattedDayOfMonth == "1." && d.DayOfWeek == DayOfWeek.Tuesday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 1 && d.FormattedDayOfMonth == "1." && d.DayOfWeek == DayOfWeek.Tuesday && d.Holiday == Holiday.NewYearsDay),
                 Mock.Of<IDay>(d => d.DayOfMonth == 2 && d.FormattedDayOfMonth == "2." && d.DayOfWeek == DayOfWeek.Wednesday),
                 Mock.Of<IDay>(d => d.DayOfMonth == 3 && d.FormattedDayOfMonth == "3." && d.DayOfWeek == DayOfWeek.Thursday),
                 Mock.Of<IDay>(d => d.DayOfMonth == 4 && d.FormattedDayOfMonth == "4." && d.DayOfWeek == DayOfWeek.Friday),
                 Mock.Of<IDay>(d => d.DayOfMonth == 5 && d.FormattedDayOfMonth == "5." && d.DayOfWeek == DayOfWeek.Saturday),
-                Mock.Of<IDay>(d => d.DayOfMonth == 6 && d.FormattedDayOfMonth == "6." && d.DayOfWeek == DayOfWeek.Sunday),
+                Mock.Of<IDay>(d => d.DayOfMonth == 6 && d.FormattedDayOfMonth == "6." && d.DayOfWeek == DayOfWeek.Sunday && d.Holiday == Holiday.Epiphany),
                 Mock.Of<IDay>(d => d.DayOfMonth == 7 && d.FormattedDayOfMonth == "7." && d.DayOfWeek == DayOfWeek.Monday),
                 Mock.Of<IDay>(d => d.DayOfMonth == 8 && d.FormattedDayOfMonth == "8." && d.DayOfWeek == DayOfWeek.Tuesday),
                 Mock.Of<IDay>(d => d.DayOfMonth == 9 && d.FormattedDayOfMonth == "9." && d.DayOfWeek == DayOfWeek.Wednesday),
@@ -332,7 +370,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Friday) == "Fri." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Saturday) == "Sat." &&
                                     n.GetDayOfWeekAbbreviation(DayOfWeek.Sunday) == "Sun." &&
-                                    n.GetDayOfWeekName(DayOfWeek.Sunday) == "Sunday");
+                                    n.GetDayOfWeekName(DayOfWeek.Sunday) == "Sunday" &&
+                                    n.GetHolidayName(Holiday.NewYearsDay) == "New Years Day" && 
+                                    n.GetHolidayName(Holiday.Epiphany) == "Epiphany");
 
             return new AttendanceListDocumentGenerator(stubAttendanceListData, names);
         }

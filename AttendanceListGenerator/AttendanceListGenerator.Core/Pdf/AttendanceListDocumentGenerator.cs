@@ -145,12 +145,35 @@ namespace AttendanceListGenerator.Core.Pdf
             row.Cells[1].AddParagraph(_names.GetDayOfWeekAbbreviation(day.DayOfWeek));
 
             // Add 'SUNDAY' centered text to all of the fullname columns
-            if (day.DayOfWeek == DayOfWeek.Sunday)
+            if (day.DayOfWeek == DayOfWeek.Sunday && day.Holiday != Holiday.None)
+            {
+                for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
+                {
+                    if (i % 2 == 0)
+                        row.Cells[i + 2].AddParagraph(_names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper());
+                    else
+                        row.Cells[i + 2].AddParagraph(_names.GetHolidayName(day.Holiday).ToUpper());
+
+                    row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
+                }
+            }
+            else if (day.DayOfWeek == DayOfWeek.Sunday)
+            {
                 for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
                 {
                     row.Cells[i + 2].AddParagraph(_names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper());
                     row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
                 }
+            }
+            else if (day.Holiday != Holiday.None)
+            {
+                for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
+                {
+                    row.Cells[i + 2].AddParagraph(_names.GetHolidayName(day.Holiday).ToUpper());
+                    row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
+                }
+            }
+
         }
         #endregion
 
