@@ -8,6 +8,8 @@ namespace AttendanceListGenerator.Core.Data
     {
         public IList<IDayOff> DaysOff { get; private set; }
 
+        public int Year { get; private set; }
+
         public IList<IDayOff> GetDaysOff(Month month)
         {
             if (month == Month.None)
@@ -21,8 +23,10 @@ namespace AttendanceListGenerator.Core.Data
             if (year < 1900 || year > 2100)
                 throw new ArgumentOutOfRangeException("Year should be between 1900 and 2100");
 
+            Year = year;
+
             // Count Easter Sunday and Monday dates
-            DateTime easterSundayDate = GetEasterSundayDate(year);
+            DateTime easterSundayDate = GetEasterSundayDate(Year);
             DateTime easterMondayDate = easterSundayDate + TimeSpan.FromDays(1);
 
             // Count DescendOfTheHolySpirit and CorpusChristiDay dates
@@ -32,19 +36,19 @@ namespace AttendanceListGenerator.Core.Data
             // Add all days off to the list
             DaysOff = new List<IDayOff>
             {
-                new DayOff(Holiday.NewYearsDay, new DateTime(year, 1, 1)),
-                new DayOff(Holiday.Epiphany, new DateTime(year, 1, 6)),
+                new DayOff(Holiday.NewYearsDay, new DateTime(Year, 1, 1)),
+                new DayOff(Holiday.Epiphany, new DateTime(Year, 1, 6)),
                 new DayOff(Holiday.EasterSunday, easterSundayDate),
                 new DayOff(Holiday.EasterMonday, easterMondayDate),
-                new DayOff(Holiday.LabourDay, new DateTime(year, 5, 1)),
-                new DayOff(Holiday.ConstitutionDay, new DateTime(year, 5, 3)),
+                new DayOff(Holiday.LabourDay, new DateTime(Year, 5, 1)),
+                new DayOff(Holiday.ConstitutionDay, new DateTime(Year, 5, 3)),
                 new DayOff(Holiday.DescendOfTheHolySpirit, descendOfTheHolySpiritDate),
                 new DayOff(Holiday.CorpusChristiDay, corpusChristiDayDate),
-                new DayOff(Holiday.ArmedForcesDay, new DateTime(year, 8, 15)),
-                new DayOff(Holiday.AllSaintsDay, new DateTime(year, 11, 1)),
-                new DayOff(Holiday.IndependenceDay, new DateTime(year, 11, 11)),
-                new DayOff(Holiday.Christmas, new DateTime(year, 12, 25)),
-                new DayOff(Holiday.Christmas, new DateTime(year, 12, 26))
+                new DayOff(Holiday.ArmedForcesDay, new DateTime(Year, 8, 15)),
+                new DayOff(Holiday.AllSaintsDay, new DateTime(Year, 11, 1)),
+                new DayOff(Holiday.IndependenceDay, new DateTime(Year, 11, 11)),
+                new DayOff(Holiday.Christmas, new DateTime(Year, 12, 25)),
+                new DayOff(Holiday.Christmas, new DateTime(Year, 12, 26))
             };
         }
 

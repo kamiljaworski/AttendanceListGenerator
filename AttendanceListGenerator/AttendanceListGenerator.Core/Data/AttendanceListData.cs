@@ -20,8 +20,8 @@ namespace AttendanceListGenerator.Core.Data
 
         public AttendanceListData(IDaysOffData daysOff, IList<IPerson> people, Month month, int year)
         {
-            if (daysOff == null)
-                throw new ArgumentException("Days off data cannot be null");
+            if (daysOff == null || daysOff.Year != year)
+                throw new ArgumentException("Days off data cannot be null and its year must be the same as passed in this constructor");
 
             if (people == null || people.Count < _minNumberOfFullnames || people.Count > _maxNumberOfFullnames)
                 throw new ArgumentException("People list should contain at least 1 person and at most 7");

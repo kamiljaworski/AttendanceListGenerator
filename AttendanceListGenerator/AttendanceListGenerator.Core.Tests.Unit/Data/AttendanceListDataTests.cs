@@ -95,6 +95,14 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
             Assert.That(constructor, Throws.ArgumentException);
         }
 
+        [Test]
+        public void Constructor_PassDaysOffDataWithAnotherYear_ThrowsArgumentException()
+        {
+            TestDelegate constructor = () => new AttendanceListData(Mock.Of<IDaysOffData>(d => d.Year == 2019), GetListOfPeople(), Month.January, 2019);
+
+            Assert.That(constructor, Throws.ArgumentException);
+        }
+
         [TestCase(1899)]
         [TestCase(1800)]
         [TestCase(1600)]

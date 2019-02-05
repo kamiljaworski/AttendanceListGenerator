@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.Data
 {
-    class DaysOffTests
+    class DaysOffDataTests
     {
         [TestCase(1899)]
         [TestCase(1800)]
@@ -36,6 +36,14 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
             DaysOffData daysOffList = new DaysOffData(2019);
 
             Assert.That(daysOffList.DaysOff.Count, Is.EqualTo(13));
+        }
+
+        [Test]
+        public void Constructor_Year2019_YearPropertyEqualTo2019()
+        {
+            DaysOffData daysOffList = new DaysOffData(2019);
+
+            Assert.That(daysOffList.Year, Is.EqualTo(2019));
         }
 
         [Test]
