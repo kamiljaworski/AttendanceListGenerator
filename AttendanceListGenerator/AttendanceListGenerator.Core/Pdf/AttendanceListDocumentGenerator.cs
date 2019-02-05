@@ -124,10 +124,10 @@ namespace AttendanceListGenerator.Core.Pdf
             Row row = table.AddRow();
             for (int i = 2; i <= numberOfColumns; ++i)
                 if (i - 2 < _data.People.Count)
-                    AddFullnameToTheCell(row, i, _data.People[i - 2]);
+                    AddFullnameToTheColumn(row, i, _data.People[i - 2]);
         }
 
-        private void AddFullnameToTheCell(Row row, int index, IPerson person)
+        private void AddFullnameToTheColumn(Row row, int index, IPerson person)
         {
             // Add line break between first and last name
             string fullname = person.FirstName + "\n" + person.LastName;
@@ -144,32 +144,35 @@ namespace AttendanceListGenerator.Core.Pdf
             row.Cells[0].AddParagraph(day.FormattedDayOfMonth);
             row.Cells[1].AddParagraph(_names.GetDayOfWeekAbbreviation(day.DayOfWeek));
 
-            // Add 'SUNDAY' centered text to all of the fullname columns
-            if (day.DayOfWeek == DayOfWeek.Sunday && day.Holiday != Holiday.None)
-            {
-                for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
-                {
-                    if (i % 2 == 0)
-                        row.Cells[i + 2].AddParagraph(_names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper());
-                    else
-                        row.Cells[i + 2].AddParagraph(_names.GetHolidayName(day.Holiday).ToUpper());
 
-                    row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
-                }
-            }
-            else if (day.DayOfWeek == DayOfWeek.Sunday)
+            if (day.DayOfWeek == DayOfWeek.Sunday || day.Holiday != Holiday.None)
             {
+                // Get actual day and holiday enum
+                DayOfWeek actualDay = day.DayOfWeek;
+                Holiday actualHoliday = day.Holiday;
+
+                // Get text to print in the document
+                string sundayText = _names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper();
+                string holidayText = string.Empty;
+
+                // Check if holiday is not equal to None and get this holiday name
+                if (actualHoliday != Holiday.None)
+                    holidayText = _names.GetHolidayName(day.Holiday).ToUpper();
+
                 for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
                 {
-                    row.Cells[i + 2].AddParagraph(_names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper());
-                    row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
-                }
-            }
-            else if (day.Holiday != Holiday.None)
-            {
-                for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
-                {
-                    row.Cells[i + 2].AddParagraph(_names.GetHolidayName(day.Holiday).ToUpper());
+                    string actualColumnText;
+
+                    if (actualDay == DayOfWeek.Sunday && actualHoliday != Holiday.None && i % 2 == 0)
+                        actualColumnText = sundayText;
+                    else if (actualDay == DayOfWeek.Sunday && actualHoliday != Holiday.None && i % 2 == 1)
+                        actualColumnText = holidayText;
+                    else if (actualDay == DayOfWeek.Sunday)
+                        actualColumnText = sundayText;
+                    else
+                        actualColumnText = holidayText;
+
+                    row.Cells[i + 2].AddParagraph(actualColumnText);
                     row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
                 }
             }
