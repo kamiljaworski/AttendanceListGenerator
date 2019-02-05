@@ -13,7 +13,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(DayOfWeek.Friday, DayOfWeek.Saturday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday)]
-        public void Next_ReturnsProperNextDay(DayOfWeek current, DayOfWeek expected)
+        public void Next_ReturnsCorrectNextDay(DayOfWeek current, DayOfWeek expected)
         {
             DayOfWeek nextDayOfWeek = current.Next();
 
@@ -27,7 +27,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(DayOfWeek.Friday, DayOfWeek.Thursday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday)]
-        public void Previous_ReturnsProperNextDay(DayOfWeek current, DayOfWeek expected)
+        public void Previous_ReturnsCorrectNextDay(DayOfWeek current, DayOfWeek expected)
         {
             DayOfWeek previousDayOfWeek = current.Previous();
 
