@@ -5,7 +5,7 @@ using System;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.Helpers
 {
-    public class EnumNavigatorTests
+    class EnumNavigatorTests
     {
         [TestCase(DayOfWeek.Monday, DayOfWeek.Tuesday)]
         [TestCase(DayOfWeek.Tuesday, DayOfWeek.Wednesday)]
@@ -14,7 +14,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Helpers
         [TestCase(DayOfWeek.Friday, DayOfWeek.Saturday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Sunday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Monday)]
-        public void Next_DayOfWeek_ReturnsProperNextDay(DayOfWeek current, DayOfWeek expected)
+        public void Next_DayOfWeek_ReturnsCorrectNextDay(DayOfWeek current, DayOfWeek expected)
         {
             DayOfWeek nextDayOfWeek = EnumNavigator<DayOfWeek>.Next(current);
 
@@ -28,7 +28,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Helpers
         [TestCase(DayOfWeek.Friday, DayOfWeek.Thursday)]
         [TestCase(DayOfWeek.Saturday, DayOfWeek.Friday)]
         [TestCase(DayOfWeek.Sunday, DayOfWeek.Saturday)]
-        public void Previous_DayOfWeek_ReturnsProperNextDay(DayOfWeek current, DayOfWeek expected)
+        public void Previous_DayOfWeek_ReturnsCorrectNextDay(DayOfWeek current, DayOfWeek expected)
         {
             DayOfWeek previousDayOfWeek = EnumNavigator<DayOfWeek>.Previous(current);
 
@@ -36,7 +36,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Helpers
         }
 
         [Test]
-        public void Next_TypeThatIsNotAnEnum_ThrowsTypeInitializationException()
+        public void Next_NotAnEnumType_ThrowsTypeInitializationException()
         {
             TestDelegate executeNextMethod = () => EnumNavigator<DateTime>.Next(DateTime.Now);
 
@@ -44,7 +44,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Helpers
         }
 
         [Test]
-        public void Previous_TypeThatIsNotAnEnum_ThrowsTypeInitializationException()
+        public void Previous_NotAnEnumType_ThrowsTypeInitializationException()
         {
             TestDelegate executePreviousMethod = () => EnumNavigator<DateTime>.Previous(DateTime.Now);
 
