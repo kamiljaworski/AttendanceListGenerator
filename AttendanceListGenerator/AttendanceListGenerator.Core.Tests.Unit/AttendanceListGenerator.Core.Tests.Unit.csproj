@@ -64,6 +64,8 @@
     <Compile Include="Data\AttendanceListDataTests.cs" />
     <Compile Include="Data\DayOfWeekNavigatorTests.cs" />
     <Compile Include="Data\DaysOffDataTests.cs" />
+    <Compile Include="Data\DayTests.cs" />
+    <Compile Include="Data\PersonTests.cs" />
     <Compile Include="Helpers\EnumNavigatorTests.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

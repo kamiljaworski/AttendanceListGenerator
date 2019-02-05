@@ -313,6 +313,16 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
             Assert.That(day.Holiday, Is.EqualTo(Holiday.None));
         }
 
+        [Test]
+        public void MaxNumberOfFullnames_CorrectData_MaxNumberOfFullnamesIsEqualTo7()
+        {
+            IDaysOffData daysOff = Mock.Of<IDaysOffData>(d => d.Year == 2019);
+
+            AttendanceListData listData = new AttendanceListData(daysOff, GetListOfPeople(), Month.January, 2019);
+
+            Assert.That(listData.MaxNumberOfFullnames, Is.EqualTo(7));
+        }
+
         private IList<IPerson> GetListOfPeople()
         {
             return new List<IPerson>

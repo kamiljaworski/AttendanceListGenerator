@@ -14,7 +14,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         [TestCase(2101)]
         [TestCase(2110)]
         [TestCase(2500)]
-        public void Constructor_PassYearLessThan1900OrAbove2100_ThrowArgumentOutOfRangeException(int year)
+        public void Constructor_YearLessThan1900OrAbove2100_ThrowsArgumentOutOfRangeException(int year)
         {
             TestDelegate constructor = () => new DaysOffData(year);
 
@@ -23,7 +23,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
 
         [TestCase(1900)]
         [TestCase(2100)]
-        public void Constructor_PassYear1900And2100_DoNotThrowArgumentOutOfRangeException(int year)
+        public void Constructor_Year1900And2100_DoesNotThrowArgumentOutOfRangeException(int year)
         {
             TestDelegate constructor = () => new DaysOffData(year);
 
@@ -39,7 +39,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         }
 
         [Test]
-        public void Constructor_Year2019_YearPropertyEqualTo2019()
+        public void Constructor_Year2019_ObjectsYearPropertyEqualTo2019()
         {
             DaysOffData daysOffList = new DaysOffData(2019);
 
