@@ -144,35 +144,34 @@ namespace AttendanceListGenerator.Core.Pdf
             row.Cells[0].AddParagraph(day.FormattedDayOfMonth);
             row.Cells[1].AddParagraph(_names.GetDayOfWeekAbbreviation(day.DayOfWeek));
 
-
             if (day.DayOfWeek == DayOfWeek.Sunday || day.Holiday != Holiday.None)
             {
                 // Get actual day and holiday enum
-                DayOfWeek actualDay = day.DayOfWeek;
-                Holiday actualHoliday = day.Holiday;
+                DayOfWeek currentDay = day.DayOfWeek;
+                Holiday currentHoliday = day.Holiday;
 
                 // Get text to print in the document
                 string sundayText = _names.GetDayOfWeekName(DayOfWeek.Sunday).ToUpper();
                 string holidayText = string.Empty;
 
                 // Check if holiday is not equal to None and get this holiday name
-                if (actualHoliday != Holiday.None)
+                if (currentHoliday != Holiday.None)
                     holidayText = _names.GetHolidayName(day.Holiday).ToUpper();
 
                 for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
                 {
-                    string actualColumnText;
+                    string currentColumnText;
 
-                    if (actualDay == DayOfWeek.Sunday && actualHoliday != Holiday.None && i % 2 == 0)
-                        actualColumnText = sundayText;
-                    else if (actualDay == DayOfWeek.Sunday && actualHoliday != Holiday.None && i % 2 == 1)
-                        actualColumnText = holidayText;
-                    else if (actualDay == DayOfWeek.Sunday)
-                        actualColumnText = sundayText;
+                    if (currentDay == DayOfWeek.Sunday && currentHoliday != Holiday.None && i % 2 == 0)
+                        currentColumnText = sundayText;
+                    else if (currentDay == DayOfWeek.Sunday && currentHoliday != Holiday.None && i % 2 == 1)
+                        currentColumnText = holidayText;
+                    else if (currentDay == DayOfWeek.Sunday)
+                        currentColumnText = sundayText;
                     else
-                        actualColumnText = holidayText;
+                        currentColumnText = holidayText;
 
-                    row.Cells[i + 2].AddParagraph(actualColumnText);
+                    row.Cells[i + 2].AddParagraph(currentColumnText);
                     row.Cells[i + 2].Format.Alignment = ParagraphAlignment.Center;
                 }
             }
