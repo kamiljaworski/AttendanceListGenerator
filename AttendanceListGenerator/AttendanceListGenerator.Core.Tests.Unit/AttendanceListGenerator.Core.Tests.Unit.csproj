@@ -67,6 +67,7 @@
     <Compile Include="Data\DayTests.cs" />
     <Compile Include="Data\PersonTests.cs" />
     <Compile Include="Helpers\EnumNavigatorTests.cs" />
+    <Compile Include="IO\ApplicationCatalogPathProviderTests.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
