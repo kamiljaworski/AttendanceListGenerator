@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AttendanceListDataTests.cs" />
+    <Compile Include="Data\DateTimeProviderTests.cs" />
     <Compile Include="Data\DayOfWeekNavigatorTests.cs" />
     <Compile Include="Data\DaysOffDataTests.cs" />
     <Compile Include="Data\DayTests.cs" />
