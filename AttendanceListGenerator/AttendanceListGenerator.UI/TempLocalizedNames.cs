@@ -10,6 +10,8 @@ namespace AttendanceListGenerator.UI
 
         public string DocumentComment => "Lista pracownicza luty 2019";
 
+        public string ApplicationName => "Lista pracownicza";
+
         public string GetDayOfWeekAbbreviation(DayOfWeek dayOfWeek)
         {
             switch (dayOfWeek)
