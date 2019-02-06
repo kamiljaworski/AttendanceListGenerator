@@ -8,9 +8,9 @@ namespace AttendanceListGenerator.UI
     {
         public string DocumentAuthor => "Kamil Jaworski";
 
-        public string DocumentComment => "Lista pracownicza luty 2019";
+        public string DocumentComment => "Lista obecności - Luty 2019";
 
-        public string ApplicationName => "Lista pracownicza";
+        public string ApplicationName => "Generator list obecności";
 
         public string GetDayOfWeekAbbreviation(DayOfWeek dayOfWeek)
         {
@@ -49,7 +49,7 @@ namespace AttendanceListGenerator.UI
 
         public string GetMonthName(Month month)
         {
-            throw new NotImplementedException();
+            return "Styczeń";
         }
     }
 }

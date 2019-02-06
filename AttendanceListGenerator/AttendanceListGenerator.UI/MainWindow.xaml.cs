@@ -1,10 +1,12 @@
 ﻿using AttendanceListGenerator.Core.Data;
+using AttendanceListGenerator.Core.IO;
 using AttendanceListGenerator.Core.Pdf;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 
 namespace AttendanceListGenerator.UI
@@ -30,12 +32,22 @@ namespace AttendanceListGenerator.UI
             };
 
             IAttendanceListData attendanceListData = new AttendanceListData(new DaysOffData(2019), people, Month.January, 2019);
-            IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(attendanceListData, new TempLocalizedNames());
+            ILocalizedNames localizedNames = new TempLocalizedNames();
+            IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(attendanceListData, localizedNames);
             Document document = documentGenerator.GenerateDocument();
-            SaveDocument(document);
+
+            string path = new ApplicationCatalogPathProvider(localizedNames).GetApplicationCatalogPath();
+            string fileName = new FileNameProvider(attendanceListData, localizedNames, new DateTimeProvider()).GetPdfFileName();
+
+            
+            if(!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+
+            SaveDocument(document, path + "\\" + fileName);
         }
 
-        private void SaveDocument(Document document)
+        private void SaveDocument(Document document, string fileName)
         {
             MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToFile(document, "MigraDoc.mdddl");
 
@@ -45,10 +57,10 @@ namespace AttendanceListGenerator.UI
             renderer.RenderDocument();
 
             // Save the document...
-            string filename = "SimpleTable.pdf";
-            renderer.PdfDocument.Save(filename);
+            //string filename = "SimpleTable.pdf";
+            renderer.PdfDocument.Save(fileName);
             // ...and start a viewer.
-            Process.Start(filename);
+            Process.Start(fileName);
         }
     }
 }

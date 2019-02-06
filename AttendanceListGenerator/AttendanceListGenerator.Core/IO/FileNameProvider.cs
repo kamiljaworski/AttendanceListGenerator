@@ -48,11 +48,12 @@ namespace AttendanceListGenerator.Core.IO
             // Build a result string
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(documentsMonth);
+            stringBuilder.Append("_");
             stringBuilder.Append(documentsYear);
             stringBuilder.Append("_");
-            stringBuilder.Append(currentYear);
-            stringBuilder.Append(currentMonth);
             stringBuilder.Append(currentDay);
+            stringBuilder.Append(currentMonth);
+            stringBuilder.Append(currentYear);
             stringBuilder.Append(currentHour);
             stringBuilder.Append(currentMinute);
             stringBuilder.Append(currentSecond);

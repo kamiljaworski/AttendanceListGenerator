@@ -42,7 +42,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
 
             string fileName = fileNameProvider.GetPdfFileName();
 
-            string expectedFileName = "January2019_20190206192532.pdf";
+            string expectedFileName = "January_2019_06022019192532.pdf";
             Assert.That(fileName, Is.EqualTo(expectedFileName));
         }
     }
