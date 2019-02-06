@@ -1,7 +1,7 @@
 ﻿namespace AttendanceListGenerator.Core.IO
 {
-    public interface IFileNameProvider
+    public interface IFilenameProvider
     {
-        string GetPdfFileName();
+        string GetPdfFilename();
     }
 }

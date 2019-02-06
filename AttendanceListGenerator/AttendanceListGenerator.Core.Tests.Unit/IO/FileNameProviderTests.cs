@@ -6,12 +6,12 @@ using System;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.IO
 {
-    class FileNameProviderTests
+    class FilenameProviderTests
     {
         [Test]
         public void Constructor_NullIAttendanceListData_ThrowsArgumentNullException()
         {
-            TestDelegate constructor = () => new FileNameProvider(null, Mock.Of<ILocalizedNames>(), Mock.Of<IDateTimeProvider>());
+            TestDelegate constructor = () => new FilenameProvider(null, Mock.Of<ILocalizedNames>(), Mock.Of<IDateTimeProvider>());
 
             Assert.That(constructor, Throws.ArgumentNullException);
         }
@@ -19,7 +19,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
         [Test]
         public void Constructor_NullILocalizedNames_ThrowsArgumentNullException()
         {
-            TestDelegate constructor = () => new FileNameProvider(Mock.Of<IAttendanceListData>(), null, Mock.Of<IDateTimeProvider>());
+            TestDelegate constructor = () => new FilenameProvider(Mock.Of<IAttendanceListData>(), null, Mock.Of<IDateTimeProvider>());
 
             Assert.That(constructor, Throws.ArgumentNullException);
         }
@@ -27,7 +27,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
         [Test]
         public void Constructor_NullIDateTimeProvider_ThrowsArgumentNullException()
         {
-            TestDelegate constructor = () => new FileNameProvider(Mock.Of<IAttendanceListData>(), Mock.Of<ILocalizedNames>(), null);
+            TestDelegate constructor = () => new FilenameProvider(Mock.Of<IAttendanceListData>(), Mock.Of<ILocalizedNames>(), null);
 
             Assert.That(constructor, Throws.ArgumentNullException);
         }
@@ -38,9 +38,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
             IAttendanceListData attendanceListData = Mock.Of<IAttendanceListData>(a => a.Month == Month.January && a.Year == 2019);
             ILocalizedNames localizedNames = Mock.Of<ILocalizedNames>(l => l.GetMonthName(Month.January) == "January");
             IDateTimeProvider dateTimeProvider = Mock.Of<IDateTimeProvider>(d => d.Now == new DateTime(2019, 2, 6, 19, 25, 32));
-            FileNameProvider fileNameProvider = new FileNameProvider(attendanceListData, localizedNames, dateTimeProvider);
+            FilenameProvider fileNameProvider = new FilenameProvider(attendanceListData, localizedNames, dateTimeProvider);
 
-            string fileName = fileNameProvider.GetPdfFileName();
+            string fileName = fileNameProvider.GetPdfFilename();
 
             string expectedFileName = "January_2019_06022019192532.pdf";
             Assert.That(fileName, Is.EqualTo(expectedFileName));

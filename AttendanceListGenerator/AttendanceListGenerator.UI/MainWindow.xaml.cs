@@ -37,17 +37,17 @@ namespace AttendanceListGenerator.UI
             Document document = documentGenerator.GenerateDocument();
 
             string path = new ApplicationCatalogPathProvider(localizedNames).GetApplicationCatalogPath();
-            string fileName = new FileNameProvider(attendanceListData, localizedNames, new DateTimeProvider()).GetPdfFileName();
+            string filename = new FilenameProvider(attendanceListData, localizedNames, new DateTimeProvider()).GetPdfFilename();
 
             
             if(!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
 
-            SaveDocument(document, path + "\\" + fileName);
+            SaveDocument(document, path + "\\" + filename);
         }
 
-        private void SaveDocument(Document document, string fileName)
+        private void SaveDocument(Document document, string filename)
         {
             MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToFile(document, "MigraDoc.mdddl");
 
@@ -58,9 +58,9 @@ namespace AttendanceListGenerator.UI
 
             // Save the document...
             //string filename = "SimpleTable.pdf";
-            renderer.PdfDocument.Save(fileName);
+            renderer.PdfDocument.Save(filename);
             // ...and start a viewer.
-            Process.Start(fileName);
+            Process.Start(filename);
         }
     }
 }

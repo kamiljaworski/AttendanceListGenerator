@@ -4,13 +4,13 @@ using System.Text;
 
 namespace AttendanceListGenerator.Core.IO
 {
-    public class FileNameProvider : IFileNameProvider
+    public class FilenameProvider : IFilenameProvider
     {
         private readonly IAttendanceListData _data;
         private readonly ILocalizedNames _names;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public FileNameProvider(IAttendanceListData data, ILocalizedNames names, IDateTimeProvider dateTimeProvider)
+        public FilenameProvider(IAttendanceListData data, ILocalizedNames names, IDateTimeProvider dateTimeProvider)
         {
             if (data == null)
                 throw new ArgumentNullException("IAttendanceListData cannot be null");
@@ -26,7 +26,7 @@ namespace AttendanceListGenerator.Core.IO
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public string GetPdfFileName()
+        public string GetPdfFilename()
         {
             string fileExtension = ".pdf";
 
