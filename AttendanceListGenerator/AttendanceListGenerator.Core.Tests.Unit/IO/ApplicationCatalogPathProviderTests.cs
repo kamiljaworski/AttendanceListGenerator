@@ -19,14 +19,30 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
         [Test]
         public void GetApplicationCatalogPath_CorrectILocalizedNames_ReturnsCorrectPath()
         {
-            string applicationName = "Attendance List Generator";
-            ILocalizedNames localizedNames = Mock.Of<ILocalizedNames>(l => l.ApplicationName == applicationName);
+            string applicationCatalogName = "Attendance List Generator";
+            ILocalizedNames localizedNames = Mock.Of<ILocalizedNames>(l => l.ApplicationCatalogName == applicationCatalogName);
             ApplicationCatalogPathProvider pathProvider = new ApplicationCatalogPathProvider(localizedNames);
 
             string applicationCatalogPath = pathProvider.GetApplicationCatalogPath();
 
             string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string expectedResult = myDocumentsPath + "\\" + applicationName;
+            string expectedResult = myDocumentsPath + "\\" + applicationCatalogName;
+            Assert.That(applicationCatalogPath, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void GetDocumentsCatalogPath_CorrectILocalizedNames_ReturnsCorrectPath()
+        {
+            string applicationName = "Attendance List Generator";
+            string documentsCatalogName = "Documents";
+            ILocalizedNames localizedNames = Mock.Of<ILocalizedNames>(l => l.ApplicationCatalogName == applicationName &&
+                                                                           l.DocumentsCatalogName == documentsCatalogName);
+            ApplicationCatalogPathProvider pathProvider = new ApplicationCatalogPathProvider(localizedNames);
+
+            string applicationCatalogPath = pathProvider.GetDocumentsCatalogPath();
+
+            string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string expectedResult = myDocumentsPath + "\\" + applicationName + "\\" + documentsCatalogName;
             Assert.That(applicationCatalogPath, Is.EqualTo(expectedResult));
         }
 

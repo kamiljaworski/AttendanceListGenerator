@@ -18,12 +18,26 @@ namespace AttendanceListGenerator.Core.IO
         public string GetApplicationCatalogPath()
         {
             string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string applicationName = _localizedNames.ApplicationName;
+            string applicationCatalogName = _localizedNames.ApplicationCatalogName;
 
             string applicationCatalogPath = myDocumentsPath;
 
-            if(!string.IsNullOrEmpty(applicationName))
-                applicationCatalogPath += "\\" + applicationName;
+            // Add application catalog name to the path
+            if (!string.IsNullOrEmpty(applicationCatalogName))
+                applicationCatalogPath += "\\" + applicationCatalogName;
+
+            return applicationCatalogPath;
+        }
+
+        public string GetDocumentsCatalogPath()
+        {
+            string applicationCatalogPath = GetApplicationCatalogPath();
+
+            string documentsCatalogName = _localizedNames.DocumentsCatalogName;
+
+            // Add Documents Catalog Path
+            if (!string.IsNullOrEmpty(documentsCatalogName))
+                applicationCatalogPath += "\\" + documentsCatalogName;
 
             return applicationCatalogPath;
         }

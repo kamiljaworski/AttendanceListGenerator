@@ -10,7 +10,9 @@ namespace AttendanceListGenerator.UI
 
         public string DocumentComment => "Lista obecności - Luty 2019";
 
-        public string ApplicationName => "Generator list obecności";
+        public string ApplicationCatalogName => "Generator list obecności";
+
+        public string DocumentsCatalogName => "Dokumenty";
 
         public string GetDayOfWeekAbbreviation(DayOfWeek dayOfWeek)
         {
