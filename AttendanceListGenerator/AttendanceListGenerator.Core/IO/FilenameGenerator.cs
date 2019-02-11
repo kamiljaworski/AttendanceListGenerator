@@ -4,35 +4,33 @@ using System.Text;
 
 namespace AttendanceListGenerator.Core.IO
 {
-    public class FilenameProvider : IFilenameProvider
+    public class FilenameGenerator : IFilenameGenerator
     {
-        private readonly IAttendanceListData _data;
         private readonly ILocalizedNames _names;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public FilenameProvider(IAttendanceListData data, ILocalizedNames names, IDateTimeProvider dateTimeProvider)
+        public FilenameGenerator(ILocalizedNames names, IDateTimeProvider dateTimeProvider)
         {
-            if (data == null)
-                throw new ArgumentNullException("IAttendanceListData cannot be null");
-
             if (names == null)
                 throw new ArgumentNullException("ILocalizedNames cannot be null");
 
             if (dateTimeProvider == null)
                 throw new ArgumentNullException("IDateTimeProvider cannot be null");
 
-            _data = data;
             _names = names;
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public string GetPdfFilename()
+        public string GeneratePdfDocumentFilename(IAttendanceListData data)
         {
+            if (data == null)
+                throw new ArgumentNullException("IAttendanceListData cannot be null");
+
             string fileExtension = ".pdf";
 
             // Get month localized name and year converted to string
-            string documentsMonth = _names.GetMonthName(_data.Month);
-            string documentsYear = _data.Year.ToString();
+            string documentsMonth = _names.GetMonthName(data.Month);
+            string documentsYear = data.Year.ToString();
 
             // Get current DateTime
             DateTime now = _dateTimeProvider.Now;
