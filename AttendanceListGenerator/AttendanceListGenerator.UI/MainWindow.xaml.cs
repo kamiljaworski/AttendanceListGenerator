@@ -45,10 +45,10 @@ namespace AttendanceListGenerator.UI
 
 
             FileSaver fileSaver = new FileSaver();
-            bool result = fileSaver.SavePdfDocument(document, path, filename);
+            bool fileExist = fileSaver.SavePdfDocument(document, path, filename);
 
-            if(result)
-                Process.Start(path + "\\" + filename);
+            if (fileExist)
+                new FileOpener().OpenFile(path, filename);
         }
     }
 }
