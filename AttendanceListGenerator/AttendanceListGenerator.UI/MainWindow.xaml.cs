@@ -36,7 +36,7 @@ namespace AttendanceListGenerator.UI
             IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(attendanceListData, localizedNames);
             Document document = documentGenerator.GenerateDocument();
 
-            string path = new ApplicationCatalogPathProvider(localizedNames).GetDocumentsCatalogPath();
+            string path = new DirectoryProvider(localizedNames).GetDocumentsDirectoryPath();
             string filename = new FilenameGenerator(attendanceListData, localizedNames, new DateTimeProvider()).GeneratePdfDocumentFilename();
 
             

@@ -77,9 +77,9 @@
     <Compile Include="Data\Month.cs" />
     <Compile Include="Data\Person.cs" />
     <Compile Include="Helpers\EnumNavigator.cs" />
-    <Compile Include="IO\ApplicationCatalogPathProvider.cs" />
+    <Compile Include="IO\DirectoryProvider.cs" />
     <Compile Include="IO\FilenameGenerator.cs" />
-    <Compile Include="IO\IApplicationCatalogPathProvider.cs" />
+    <Compile Include="IO\IDirectoryProvider.cs" />
     <Compile Include="IO\IFilenameGenerator.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGenerator.cs" />
     <Compile Include="Pdf\IAttendanceListDocumentGenerator.cs" />
