@@ -37,30 +37,18 @@ namespace AttendanceListGenerator.UI
             Document document = documentGenerator.GenerateDocument();
 
             string path = new DirectoryProvider(localizedNames).GetDocumentsDirectoryPath();
-            string filename = new FilenameGenerator(attendanceListData, localizedNames, new DateTimeProvider()).GeneratePdfDocumentFilename();
+            string filename = new FilenameGenerator(localizedNames, new DateTimeProvider()).GeneratePdfDocumentFilename(attendanceListData);
 
             
             if(!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
 
-            SaveDocument(document, path + "\\" + filename);
-        }
+            FileSaver fileSaver = new FileSaver();
+            bool result = fileSaver.SavePdfDocument(document, path, filename);
 
-        private void SaveDocument(Document document, string filename)
-        {
-            MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToFile(document, "MigraDoc.mdddl");
-
-            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp1_32.Pdf.PdfFontEmbedding.Always);
-            renderer.Document = document;
-
-            renderer.RenderDocument();
-
-            // Save the document...
-            //string filename = "SimpleTable.pdf";
-            renderer.PdfDocument.Save(filename);
-            // ...and start a viewer.
-            Process.Start(filename);
+            if(result)
+                Process.Start(path + "\\" + filename);
         }
     }
 }

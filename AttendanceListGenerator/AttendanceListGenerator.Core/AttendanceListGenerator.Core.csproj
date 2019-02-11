@@ -79,8 +79,10 @@
     <Compile Include="Helpers\EnumNavigator.cs" />
     <Compile Include="IO\DirectoryProvider.cs" />
     <Compile Include="IO\FilenameGenerator.cs" />
+    <Compile Include="IO\FileSaver.cs" />
     <Compile Include="IO\IDirectoryProvider.cs" />
     <Compile Include="IO\IFilenameGenerator.cs" />
+    <Compile Include="IO\IFileSaver.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGenerator.cs" />
     <Compile Include="Pdf\IAttendanceListDocumentGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
