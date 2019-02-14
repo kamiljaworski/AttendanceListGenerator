@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AttendanceListGenerator.UI"
+        xmlns:vm="clr-namespace:AttendanceListGenerator.UI.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
     <Grid>
-        <Button Content="Test" Width="100" Height="30" Click="Button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <Grid Grid.Row="0" Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Previous" Command="{Binding PreviousMonthCommand}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Month}" HorizontalAlignment="Center"/>
+                <Button Grid.Column="2" Content="Next" Command="{Binding NextMonthCommand}"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
