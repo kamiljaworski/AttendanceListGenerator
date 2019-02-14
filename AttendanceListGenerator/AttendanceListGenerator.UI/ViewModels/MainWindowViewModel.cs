@@ -10,21 +10,30 @@ namespace AttendanceListGenerator.UI.ViewModels
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         public Month Month { get; private set; }
+        public int Year { get; private set; }
+
         public ICommand NextMonthCommand { get; private set; }
         public ICommand PreviousMonthCommand { get; private set; }
 
         public MainWindowViewModel()
         {
             Month = Month.February;
+            Year = 2019;
 
             NextMonthCommand = new RelayCommand(() =>
             {
-                Month = EnumNavigator<Month>.Next(Month);
+                if (Month == Month.December)
+                    Year++;
+
+                Month = Month.Next();
             });
 
             PreviousMonthCommand = new RelayCommand(() =>
             {
-                Month = EnumNavigator<Month>.Previous(Month);
+                if (Month == Month.January)
+                    Year--;
+
+                Month = Month.Previous();
             });
         }
     }
