@@ -7,16 +7,16 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
 {
     class FileSaverTests
     {
-        private string pdfFilename = "test.pdf";
-        private string directoryPath = "C:";
-        private string pdfFullPath => directoryPath + "\\" + pdfFilename;
+        private string _pdfFilename = "test.pdf";
+        private string _directoryPath = "C:";
+        private string _pdfFullPath => _directoryPath + "\\" + _pdfFilename;
 
         [SetUp]
         [TearDown]
         public void DeleteTestFiles()
         {
-            if (File.Exists(pdfFullPath))
-                File.Delete(pdfFullPath);
+            if (File.Exists(_pdfFullPath))
+                File.Delete(_pdfFullPath);
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
         {
             FileSaver documentSaver = new FileSaver();
 
-            TestDelegate executeSavePdfDocument = () => documentSaver.SavePdfDocument(null, directoryPath, pdfFilename);
+            TestDelegate executeSavePdfDocument = () => documentSaver.SavePdfDocument(null, _directoryPath, _pdfFilename);
 
             Assert.That(executeSavePdfDocument, Throws.ArgumentNullException);
         }
@@ -51,7 +51,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
             FileSaver documentSaver = new FileSaver();
             Document document = GetExampleDocument();
 
-            bool result = documentSaver.SavePdfDocument(document, directoryPath, pdfFilename);
+            bool result = documentSaver.SavePdfDocument(document, _directoryPath, _pdfFilename);
 
             Assert.That(result, Is.True);
         }
@@ -62,9 +62,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
             FileSaver documentSaver = new FileSaver();
             Document document = GetExampleDocument();
 
-            documentSaver.SavePdfDocument(document, directoryPath, pdfFilename);
+            documentSaver.SavePdfDocument(document, _directoryPath, _pdfFilename);
 
-            FileAssert.Exists(pdfFullPath);
+            FileAssert.Exists(_pdfFullPath);
         }
 
         private Document GetExampleDocument()
