@@ -75,6 +75,7 @@
     <Compile Include="Data\ILocalizedNames.cs" />
     <Compile Include="Data\IPerson.cs" />
     <Compile Include="Data\Month.cs" />
+    <Compile Include="Data\MonthNavigator.cs" />
     <Compile Include="Data\Person.cs" />
     <Compile Include="Helpers\EnumNavigator.cs" />
     <Compile Include="IO\DirectoryProvider.cs" />

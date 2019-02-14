@@ -66,6 +66,7 @@
     <Compile Include="Data\DayOfWeekNavigatorTests.cs" />
     <Compile Include="Data\DaysOffDataTests.cs" />
     <Compile Include="Data\DayTests.cs" />
+    <Compile Include="Data\MonthNavigatorTests.cs" />
     <Compile Include="Data\PersonTests.cs" />
     <Compile Include="Helpers\EnumNavigatorTests.cs" />
     <Compile Include="IO\DirectoryProviderTests.cs" />
