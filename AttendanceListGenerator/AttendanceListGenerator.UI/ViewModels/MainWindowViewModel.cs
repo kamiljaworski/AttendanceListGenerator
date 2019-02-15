@@ -15,6 +15,8 @@ namespace AttendanceListGenerator.UI.ViewModels
         public Month Month { get; private set; }
         public int Year { get; private set; }
 
+        public ICommand NextYearCommand { get; private set; }
+        public ICommand PreviousYearCommand { get; private set; }
         public ICommand NextMonthCommand { get; private set; }
         public ICommand PreviousMonthCommand { get; private set; }
 
@@ -28,6 +30,16 @@ namespace AttendanceListGenerator.UI.ViewModels
 
             Month = (Month)now.Month;
             Year = now.Year;
+
+            NextYearCommand = new RelayCommand(() =>
+            {
+                Year++;
+            });
+
+            PreviousYearCommand = new RelayCommand(() =>
+            {
+                Year--;
+            });
 
             NextMonthCommand = new RelayCommand(() =>
             {

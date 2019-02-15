@@ -20,9 +20,20 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="Previous" Command="{Binding PreviousMonthCommand}"/>
-                <TextBlock Grid.Column="1" Text="{Binding Month}" HorizontalAlignment="Center"/>
-                <Button Grid.Column="2" Content="Next" Command="{Binding NextMonthCommand}"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0" Content="Previous" Command="{Binding PreviousYearCommand}"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Year}" HorizontalAlignment="Center"/>
+                <Button Grid.Column="2" Grid.Row="0" Content="Next" Command="{Binding NextYearCommand}"/>
+
+                <Button Grid.Column="0" Grid.Row="1" Content="Previous" Command="{Binding PreviousMonthCommand}"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Month}" HorizontalAlignment="Center"/>
+                <Button Grid.Column="2" Grid.Row="1" Content="Next" Command="{Binding NextMonthCommand}"/>
+
             </Grid>
         </StackPanel>
     </Grid>
