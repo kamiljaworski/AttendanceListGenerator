@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using AttendanceListGenerator.Core.Data;
+using AttendanceListGenerator.UI.ViewModels;
+using System.Windows;
 
 namespace AttendanceListGenerator.UI
 {
@@ -10,6 +12,7 @@ namespace AttendanceListGenerator.UI
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(new DateTimeProvider());
         }
     }
 }

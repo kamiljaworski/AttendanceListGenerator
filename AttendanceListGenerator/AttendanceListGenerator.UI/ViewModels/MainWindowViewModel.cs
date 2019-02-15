@@ -1,5 +1,6 @@
 ﻿using AttendanceListGenerator.Core.Data;
 using AttendanceListGenerator.Core.Helpers;
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -7,6 +8,8 @@ namespace AttendanceListGenerator.UI.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly IDateTimeProvider _dateTimeProvider;
+
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         public Month Month { get; private set; }
@@ -15,10 +18,16 @@ namespace AttendanceListGenerator.UI.ViewModels
         public ICommand NextMonthCommand { get; private set; }
         public ICommand PreviousMonthCommand { get; private set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IDateTimeProvider dateTimeProvider)
         {
-            Month = Month.February;
-            Year = 2019;
+            if (dateTimeProvider == null)
+                throw new ArgumentNullException("Date Time Provider cannot be null");
+
+            _dateTimeProvider = dateTimeProvider;
+            DateTime now = _dateTimeProvider.Now;
+
+            Month = (Month)now.Month;
+            Year = now.Year;
 
             NextMonthCommand = new RelayCommand(() =>
             {
