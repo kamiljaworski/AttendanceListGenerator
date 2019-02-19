@@ -113,7 +113,7 @@ namespace AttendanceListGenerator.UI.Tests.Unit.Localization
         [TestCase("pl-PL", Holiday.Christmas, "Boże Narodzenie")]
         [TestCase("pl-PL", Holiday.ConstitutionDay, "Konstytucja 3 maja")]
         [TestCase("pl-PL", Holiday.CorpusChristi, "Boże Ciało")]
-        [TestCase("pl-PL", Holiday.DescendOfTheHolySpirit, "Zesłanie Ducha Świetego")]
+        [TestCase("pl-PL", Holiday.DescendOfTheHolySpirit, "Zesłanie Ducha Świętego")]
         [TestCase("pl-PL", Holiday.EasterMonday, "Poniedziałek Wielkanocny")]
         [TestCase("pl-PL", Holiday.EasterSunday, "Wielkanoc")]
         [TestCase("pl-PL", Holiday.Epiphany, "Święto Trzech Króli")]

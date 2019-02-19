@@ -2,6 +2,7 @@
 using AttendanceListGenerator.Core.Helpers;
 using AttendanceListGenerator.Core.IO;
 using AttendanceListGenerator.Core.Pdf;
+using AttendanceListGenerator.UI.Localization;
 using MigraDoc.DocumentObjectModel;
 using System;
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ namespace AttendanceListGenerator.UI.ViewModels
                 IAttendanceListData listData = new AttendanceListData(daysOff, people, Month, Year);
 
                 // Create document generator
-                ILocalizedNames localizedNames = new TempLocalizedNames();
+                ILocalizedNames localizedNames = new LocalizedNames();
                 IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(listData, localizedNames);
 
                 // Generate a document
