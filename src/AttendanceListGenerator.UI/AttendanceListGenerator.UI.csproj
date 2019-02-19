@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Localization\LocalizedNames.cs" />
     <Compile Include="Localization\Strings.pl-PL.Designer.cs">
       <DependentUpon>Strings.pl-PL.resx</DependentUpon>
       <AutoGen>True</AutoGen>

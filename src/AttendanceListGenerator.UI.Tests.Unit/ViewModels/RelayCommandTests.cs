@@ -1,7 +1,7 @@
 ﻿using AttendanceListGenerator.UI.ViewModels;
 using NUnit.Framework;
 
-namespace AttendanceListGenerator.UI.Tests.Unit
+namespace AttendanceListGenerator.UI.Tests.Unit.ViewModels
 {
     class RelayCommandTests
     {
