@@ -54,13 +54,13 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding FirstPersonFullname}"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SecondPersonFullname}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ThirdPersonFullname}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding FourthPersonFullname}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding FifthPersonFullname}"/>
-                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SixthPersonFullname}"/>
-                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding SeventhPersonFullname}"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Fullnames[0]}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Fullnames[1]}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Fullnames[2]}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Fullnames[3]}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Fullnames[4]}"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Fullnames[5]}"/>
+                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Fullnames[6]}"/>
 
                 <Button Grid.Column="1" Grid.Row="7" Content="Generate" Command="{Binding GenerateCommand}"/>
             </Grid>

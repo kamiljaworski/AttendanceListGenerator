@@ -16,12 +16,12 @@ namespace AttendanceListGenerator.Core.Data
             LastName = lastName;
         }
 
-        public Person(string fullName)
+        public Person(string fullname)
         {
-            if (fullName == null)
+            if (fullname == null)
                 throw new ArgumentNullException();
 
-            string[] splittedFullname = fullName.Split(' ');
+            string[] splittedFullname = fullname.Split(' ');
 
             string firstName = string.Empty;
             string lastName = string.Empty;

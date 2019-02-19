@@ -13,18 +13,13 @@ namespace AttendanceListGenerator.UI.ViewModels
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly IDateTimeProvider _dateTimeProvider;
+        private const int _numberOfFullnames = 7;
 
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         public Month Month { get; private set; }
         public int Year { get; private set; }
-        public string FirstPersonFullname { get; set; }
-        public string SecondPersonFullname { get; set; }
-        public string ThirdPersonFullname { get; set; }
-        public string FourthPersonFullname { get; set; }
-        public string FifthPersonFullname { get; set; }
-        public string SixthPersonFullname { get; set; }
-        public string SeventhPersonFullname { get; set; }
+        public IList<string> Fullnames { get; set; }
 
         public ICommand NextYearCommand { get; private set; }
         public ICommand PreviousYearCommand { get; private set; }
@@ -36,6 +31,11 @@ namespace AttendanceListGenerator.UI.ViewModels
         {
             if (dateTimeProvider == null)
                 throw new ArgumentNullException("DateTimeProvider cannot be null");
+
+            // Create Fullnames list and fill it
+            Fullnames = new List<string>();
+            for (int i = 0; i < _numberOfFullnames; i++)
+                Fullnames.Add(string.Empty);
 
             _dateTimeProvider = dateTimeProvider;
             DateTime now = _dateTimeProvider.Now;
@@ -71,28 +71,7 @@ namespace AttendanceListGenerator.UI.ViewModels
 
             GenerateCommand = new RelayCommand(() =>
             {
-                IList<IPerson> people = new List<IPerson>();
-
-                if (!string.IsNullOrEmpty(FirstPersonFullname))
-                    people.Add(new Person(FirstPersonFullname));
-
-                if (!string.IsNullOrEmpty(SecondPersonFullname))
-                    people.Add(new Person(SecondPersonFullname));
-
-                if (!string.IsNullOrEmpty(ThirdPersonFullname))
-                    people.Add(new Person(ThirdPersonFullname));
-
-                if (!string.IsNullOrEmpty(FourthPersonFullname))
-                    people.Add(new Person(FourthPersonFullname));
-
-                if (!string.IsNullOrEmpty(FifthPersonFullname))
-                    people.Add(new Person(FifthPersonFullname));
-
-                if (!string.IsNullOrEmpty(SixthPersonFullname))
-                    people.Add(new Person(SixthPersonFullname));
-
-                if (!string.IsNullOrEmpty(SeventhPersonFullname))
-                    people.Add(new Person(SeventhPersonFullname));
+                IList<IPerson> people = GetPeopleList();
 
                 // Generate data
                 IDaysOffData daysOff = new DaysOffData(Year);
@@ -119,6 +98,17 @@ namespace AttendanceListGenerator.UI.ViewModels
                 IFileOpener fileOpener = new FileOpener();
                 fileOpener.OpenFile(path, filename);
             });
+        }
+
+        private IList<IPerson> GetPeopleList()
+        {
+            IList<IPerson> people = new List<IPerson>();
+
+            foreach (string fullname in Fullnames)
+                if (!string.IsNullOrEmpty(fullname))
+                    people.Add(new Person(fullname));
+
+            return people;
         }
     }
 }
