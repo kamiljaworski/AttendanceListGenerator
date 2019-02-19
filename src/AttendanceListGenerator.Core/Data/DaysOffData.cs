@@ -43,7 +43,7 @@ namespace AttendanceListGenerator.Core.Data
                 new DayOff(Holiday.LabourDay, new DateTime(Year, 5, 1)),
                 new DayOff(Holiday.ConstitutionDay, new DateTime(Year, 5, 3)),
                 new DayOff(Holiday.DescendOfTheHolySpirit, descendOfTheHolySpiritDate),
-                new DayOff(Holiday.CorpusChristiDay, corpusChristiDayDate),
+                new DayOff(Holiday.CorpusChristi, corpusChristiDayDate),
                 new DayOff(Holiday.ArmedForcesDay, new DateTime(Year, 8, 15)),
                 new DayOff(Holiday.AllSaintsDay, new DateTime(Year, 11, 1)),
                 new DayOff(Holiday.IndependenceDay, new DateTime(Year, 11, 11)),

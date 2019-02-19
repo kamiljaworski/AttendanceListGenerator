@@ -10,7 +10,7 @@
         LabourDay,
         ConstitutionDay,
         DescendOfTheHolySpirit,
-        CorpusChristiDay,
+        CorpusChristi,
         ArmedForcesDay,
         AllSaintsDay,
         IndependenceDay,

@@ -8,8 +8,6 @@ namespace AttendanceListGenerator.UI
     {
         public string DocumentAuthor => "Kamil Jaworski";
 
-        public string DocumentComment => "Lista obecności - Luty 2019";
-
         public string ApplicationDirectoryName => "Generator list obecności";
 
         public string DocumentsDirectoryName => "Dokumenty";

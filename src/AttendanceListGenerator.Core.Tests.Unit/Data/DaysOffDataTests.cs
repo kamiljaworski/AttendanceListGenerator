@@ -120,7 +120,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         public void Constructor_Year2019_CorpusChristiDayDateIs_20_06_2019()
         {
             DaysOffData daysOffList = new DaysOffData(2019);
-            IDayOff corpusChristiDay = daysOffList.DaysOff.FirstOrDefault(x => x.Holiday == Holiday.CorpusChristiDay);
+            IDayOff corpusChristiDay = daysOffList.DaysOff.FirstOrDefault(x => x.Holiday == Holiday.CorpusChristi);
 
             DateTime expectedDate = new DateTime(2019, 6, 20);
             Assert.That(corpusChristiDay.Date, Is.EqualTo(expectedDate));
@@ -210,7 +210,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         public void Constructor_Year2018_CorpusChristiDayDateIs_31_05_2018()
         {
             DaysOffData daysOffList = new DaysOffData(2018);
-            IDayOff corpusChristiDay = daysOffList.DaysOff.FirstOrDefault(x => x.Holiday == Holiday.CorpusChristiDay);
+            IDayOff corpusChristiDay = daysOffList.DaysOff.FirstOrDefault(x => x.Holiday == Holiday.CorpusChristi);
 
             DateTime expectedDate = new DateTime(2018, 5, 31);
             Assert.That(corpusChristiDay.Date, Is.EqualTo(expectedDate));
@@ -264,7 +264,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
 
             IList<IDayOff> list = daysOffList.GetDaysOff(Month.June);
 
-            var result = list.Where(d => d.Holiday == Holiday.DescendOfTheHolySpirit || d.Holiday == Holiday.CorpusChristiDay);
+            var result = list.Where(d => d.Holiday == Holiday.DescendOfTheHolySpirit || d.Holiday == Holiday.CorpusChristi);
             Assert.That(result.Count, Is.EqualTo(2));
         }
     }

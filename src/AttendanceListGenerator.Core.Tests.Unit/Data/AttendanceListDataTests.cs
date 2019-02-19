@@ -279,7 +279,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
                                                          d.GetDaysOff(Month.January) == new List<IDayOff>
                                                          {
                                                              Mock.Of<IDayOff>(x => x.Date == new DateTime(2019, 8, 9) && x.Holiday == Holiday.DescendOfTheHolySpirit),
-                                                             Mock.Of<IDayOff>(x => x.Date == new DateTime(2019, 8, 20) && x.Holiday == Holiday.CorpusChristiDay),
+                                                             Mock.Of<IDayOff>(x => x.Date == new DateTime(2019, 8, 20) && x.Holiday == Holiday.CorpusChristi),
                                                          });
             AttendanceListData listData = new AttendanceListData(daysOff, GetListOfPeople(), Month.January, 2019);
             IDay day = listData.Days[8];
@@ -294,12 +294,12 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
                                                          d.GetDaysOff(Month.January) == new List<IDayOff>
                                                          {
                                                              Mock.Of<IDayOff>(x => x.Date == new DateTime(2019, 8, 9) && x.Holiday == Holiday.DescendOfTheHolySpirit),
-                                                             Mock.Of<IDayOff>(x => x.Date == new DateTime(2019, 8, 20) && x.Holiday == Holiday.CorpusChristiDay),
+                                                             Mock.Of<IDayOff>(x => x.Date == new DateTime(2019, 8, 20) && x.Holiday == Holiday.CorpusChristi),
                                                          });
             AttendanceListData listData = new AttendanceListData(daysOff, GetListOfPeople(), Month.January, 2019);
             IDay day = listData.Days[19];
 
-            Assert.That(day.Holiday, Is.EqualTo(Holiday.CorpusChristiDay));
+            Assert.That(day.Holiday, Is.EqualTo(Holiday.CorpusChristi));
         }
 
         [Test]
