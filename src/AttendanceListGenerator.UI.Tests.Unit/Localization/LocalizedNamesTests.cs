@@ -185,8 +185,6 @@ namespace AttendanceListGenerator.UI.Tests.Unit.Localization
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
-
-
         private void UseCulture(string cultureCode)
         {
             CultureInfo.CurrentCulture = new CultureInfo(cultureCode, false);
