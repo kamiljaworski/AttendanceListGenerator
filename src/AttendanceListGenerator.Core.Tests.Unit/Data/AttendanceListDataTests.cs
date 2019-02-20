@@ -47,17 +47,6 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
         }
 
         [Test]
-        public void Constructor_EmptyPeopleList_ThrowsArgumentException()
-        {
-            IDaysOffData daysOff = Mock.Of<IDaysOffData>(d => d.Year == 2019);
-            IList<IPerson> people = new List<IPerson>();
-
-            TestDelegate constructor = () => new AttendanceListData(daysOff, people, Month.January, 2019);
-
-            Assert.That(constructor, Throws.ArgumentException);
-        }
-
-        [Test]
         public void Constructor_ListOf8People_ThrowsArgumentException()
         {
             IDaysOffData daysOff = Mock.Of<IDaysOffData>(d => d.Year == 2019);
