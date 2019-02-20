@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AttendanceListGenerator.UI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid MaxWidth="500" Background="LightBlue">
+    <Grid MaxWidth="500">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="2*"/>
@@ -19,39 +19,54 @@
 
         <!-- Data -->
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <TextBlock Text="Data" FontFamily="Tahoma" FontSize="24" HorizontalAlignment="Center" Margin="0 10 0 0"/>
-            
-            <TextBlock Text="Year" FontFamily="Tahoma" HorizontalAlignment="Center" Margin="0 10 0 0"/>
-            <Grid>
+            <TextBlock Text="Data" FontFamily="{StaticResource LatoLight}" FontSize="32" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+
+            <TextBlock Text="Year" FontSize="14" FontFamily="{StaticResource LatoLight}" Foreground="{StaticResource DarkGreyBrush}" 
+                       HorizontalAlignment="Center" Margin="0 10 0 0"/>
+            <Grid Margin="50 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="1" Content="Prev" Command="{Binding PreviousYearCommand}" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="2" Text="{Binding Year, FallbackValue=2019}" FontFamily="Tahoma" FontSize="24" Margin="10 0" TextAlignment="Center"/>
-                <Button Grid.Column="3" Content="Next" Command="{Binding NextYearCommand}" VerticalAlignment="Center"/>
+                <Button Grid.Column="0" Content="{StaticResource LeftArrowIcon}" FontFamily="{StaticResource Segoe-MDL2}" 
+                        Padding="10" Command="{Binding PreviousYearCommand}" />
+
+                <Viewbox Grid.Column="1" StretchDirection="DownOnly">
+                    <TextBlock Text="{Binding Year, FallbackValue=2019}" FontFamily="{StaticResource LatoRegular}" 
+                               FontSize="22" Foreground="{StaticResource DarkGreyBrush}" HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" Padding="5 0 5 0"/>
+                </Viewbox>
+                
+                <Button Grid.Column="2" Content="{StaticResource RightArrowIcon}" FontFamily="{StaticResource Segoe-MDL2}" 
+                        Padding="10" Command="{Binding NextYearCommand}" />
             </Grid>
 
-            <TextBlock Text="Month" FontFamily="Tahoma" HorizontalAlignment="Center" Margin="0 10 0 0"/>
-            <Grid>
+            <TextBlock Text="Month" FontSize="14" FontFamily="{StaticResource LatoLight}" Foreground="{StaticResource DarkGreyBrush}" 
+                       HorizontalAlignment="Center" Margin="0 10 0 0"/>
+            <Grid Margin="30 0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="1" Content="Prev" Command="{Binding PreviousMonthCommand}" VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="2" Text="{Binding Month, FallbackValue=January}" FontFamily="Tahoma" FontSize="24" Margin="10 0" TextAlignment="Center"/>
-                <Button Grid.Column="3" Content="Next" Command="{Binding NextMonthCommand}" VerticalAlignment="Center"/>
+                <Button Grid.Column="0" Content="{StaticResource LeftArrowIcon}" FontFamily="{StaticResource Segoe-MDL2}" Padding="10"  
+                        Command="{Binding PreviousMonthCommand}"/>
+
+                <Viewbox Grid.Column="1" StretchDirection="DownOnly">
+                    <TextBlock Text="{Binding Month, FallbackValue=September}" FontFamily="{StaticResource LatoRegular}" 
+                               FontSize="22" Foreground="{StaticResource DarkGreyBrush}" HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" Padding="5 0 5 0"/>
+                </Viewbox>
+                
+                <Button Grid.Column="2" Content="{StaticResource RightArrowIcon}" FontFamily="{StaticResource Segoe-MDL2}" Padding="10" 
+                        Command="{Binding NextMonthCommand}"/>
             </Grid>
 
-            <TextBlock Text="People" FontFamily="Tahoma" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+            <TextBlock Text="People" FontSize="14" FontFamily="{StaticResource LatoLight}" Foreground="{StaticResource DarkGreyBrush}" 
+                       HorizontalAlignment="Center" Margin="0 10 0 0"/>
             <TextBox Text="{Binding Fullnames[0]}" Margin="40 5 40 2"/>
             <TextBox Text="{Binding Fullnames[1]}" Margin="40 2"/>
             <TextBox Text="{Binding Fullnames[2]}" Margin="40 2"/>
@@ -60,7 +75,7 @@
             <TextBox Text="{Binding Fullnames[5]}" Margin="40 2"/>
             <TextBox Text="{Binding Fullnames[6]}" Margin="40 2"/>
         </StackPanel>
-        
+
         <!-- Settings -->
         <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock Text="Settings" FontFamily="Tahoma" FontSize="24" HorizontalAlignment="Center" Margin="0 10 0 0"/>
@@ -82,7 +97,7 @@
                 <TextBlock Text="Enable Colors"/>
             </StackPanel>
         </StackPanel>
-        
+
         <!-- Generate button -->
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Button Content="Generate" Command="{Binding GenerateCommand}" HorizontalAlignment="Center"/>
