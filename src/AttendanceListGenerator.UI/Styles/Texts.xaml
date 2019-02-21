@@ -97,5 +97,32 @@
         </Setter>
     </Style>
     <!--#endregion-->
-    
+
+    <!-- Heading TextBlock -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="Heading">
+        <Setter Property="FontFamily" Value="{StaticResource LatoLight}"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+    </Style>
+
+    <!-- Hint TextBlock -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="Hint">
+        <Setter Property="FontFamily" Value="{StaticResource LatoLight}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkGreyBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+    </Style>
+
+    <!-- Navigator TextBlock -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="Navigator">
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkGreyBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5 0"/>
+    </Style>
+
 </ResourceDictionary>
