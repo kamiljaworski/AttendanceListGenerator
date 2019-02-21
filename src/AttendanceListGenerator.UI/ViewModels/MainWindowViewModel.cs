@@ -15,6 +15,8 @@ namespace AttendanceListGenerator.UI.ViewModels
     {
         private readonly IDateTimeProvider _dateTimeProvider;
         private const int _numberOfFullnames = 7;
+        private const int _minYear = 1900;
+        private const int _maxYear = 2100;
 
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
@@ -41,64 +43,64 @@ namespace AttendanceListGenerator.UI.ViewModels
             _dateTimeProvider = dateTimeProvider;
             DateTime now = _dateTimeProvider.Now;
 
+            // Set current Month and Year
             Month = (Month)now.Month;
             Year = now.Year;
 
-            NextYearCommand = new RelayCommand(() =>
-            {
-                Year++;
-            });
+            // Create commands
+            NextYearCommand = new RelayCommand(NextYear);
+            PreviousYearCommand = new RelayCommand(PreviousYear);
+            NextMonthCommand = new RelayCommand(NextMonth);
+            PreviousMonthCommand = new RelayCommand(PreviousMonth);
+            GenerateCommand = new RelayCommand(Generate);
+        }
 
-            PreviousYearCommand = new RelayCommand(() =>
-            {
-                Year--;
-            });
+        private void NextYear() => Year = (Year < _maxYear) ? ++Year : Year;
+        private void PreviousYear() => Year = (Year > _minYear) ? --Year : Year;
+        private void NextMonth()
+        {
+            if (Month == Month.December)
+                NextYear();
 
-            NextMonthCommand = new RelayCommand(() =>
-            {
-                if (Month == Month.December)
-                    Year++;
+            Month = Month.Next();
+        }
 
-                Month = Month.Next();
-            });
+        private void PreviousMonth()
+        {
+            if (Month == Month.January)
+                PreviousYear();
 
-            PreviousMonthCommand = new RelayCommand(() =>
-            {
-                if (Month == Month.January)
-                    Year--;
+            Month = Month.Previous();
+        }
 
-                Month = Month.Previous();
-            });
+        private void Generate()
+        {
+            IList<IPerson> people = GetPeopleList();
 
-            GenerateCommand = new RelayCommand(() =>
-            {
-                IList<IPerson> people = GetPeopleList();
+            // Generate data
+            IDaysOffData daysOff = new DaysOffData(Year);
+            IAttendanceListData listData = new AttendanceListData(daysOff, people, Month, Year);
 
-                // Generate data
-                IDaysOffData daysOff = new DaysOffData(Year);
-                IAttendanceListData listData = new AttendanceListData(daysOff, people, Month, Year);
+            // Create document generator
+            ILocalizedNames localizedNames = new LocalizedNames();
+            IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(listData, localizedNames);
 
-                // Create document generator
-                ILocalizedNames localizedNames = new LocalizedNames();
-                IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(listData, localizedNames);
+            // Generate a document
+            Document document = documentGenerator.GenerateDocument();
 
-                // Generate a document
-                Document document = documentGenerator.GenerateDocument();
+            // Get directory path and filename
+            IDirectoryProvider directoryProvider = new DirectoryProvider(localizedNames);
+            IFilenameGenerator filenameGenerator = new FilenameGenerator(localizedNames, _dateTimeProvider);
+            string path = directoryProvider.GetDocumentsDirectoryPath();
+            string filename = filenameGenerator.GeneratePdfDocumentFilename(listData);
 
-                // Get directory path and filename
-                IDirectoryProvider directoryProvider = new DirectoryProvider(localizedNames);
-                IFilenameGenerator filenameGenerator = new FilenameGenerator(localizedNames, _dateTimeProvider);
-                string path = directoryProvider.GetDocumentsDirectoryPath();
-                string filename = filenameGenerator.GeneratePdfDocumentFilename(listData);
+            // Save document
+            IFileSaver fileSaver = new FileSaver();
+            fileSaver.SavePdfDocument(document, path, filename);
 
-                // Save document
-                IFileSaver fileSaver = new FileSaver();
-                fileSaver.SavePdfDocument(document, path, filename);
-
-                // And open it
-                IFileOpener fileOpener = new FileOpener();
-                fileOpener.OpenFile(path, filename);
-            });
+            // And open it
+            IFileOpener fileOpener = new FileOpener();
+            fileOpener.OpenFile(path, filename);
         }
 
         private IList<IPerson> GetPeopleList()
