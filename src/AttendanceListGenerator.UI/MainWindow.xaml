@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid MaxWidth="500">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -17,8 +17,23 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- People TextBoxes -->
+        <StackPanel Grid.RowSpan="2" Grid.Column="0">
+
+            <TextBlock Text="People" FontFamily="{StaticResource LatoLight}" FontSize="32" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+
+            <TextBox Text="{Binding Fullnames[0]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[1]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[2]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[3]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[4]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[5]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[6]}" Tag="Fullname" />
+
+        </StackPanel>
+        
         <!-- Data -->
-        <StackPanel Grid.Row="0" Grid.Column="0">
+        <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock Text="Data" FontFamily="{StaticResource LatoLight}" FontSize="32" HorizontalAlignment="Center" Margin="0 10 0 0"/>
 
             <TextBlock Text="Year" FontSize="14" FontFamily="{StaticResource LatoLight}" Foreground="{StaticResource DarkGreyBrush}" 
@@ -60,46 +75,27 @@
                                FontSize="22" Foreground="{StaticResource DarkGreyBrush}" HorizontalAlignment="Center" 
                                VerticalAlignment="Center" Padding="5 0 5 0"/>
                 </Viewbox>
-                
+
                 <Button Grid.Column="2" Content="{StaticResource RightArrowIcon}" FontFamily="{StaticResource Segoe-MDL2}" Padding="10" 
                         Command="{Binding NextMonthCommand}"/>
             </Grid>
 
-            <TextBlock Text="People" FontSize="14" FontFamily="{StaticResource LatoLight}" Foreground="{StaticResource DarkGreyBrush}" 
-                       HorizontalAlignment="Center" Margin="0 10 0 0"/>
-            <TextBox Text="{Binding Fullnames[0]}" Margin="40 5 40 2"/>
-            <TextBox Text="{Binding Fullnames[1]}" Margin="40 2"/>
-            <TextBox Text="{Binding Fullnames[2]}" Margin="40 2"/>
-            <TextBox Text="{Binding Fullnames[3]}" Margin="40 2"/>
-            <TextBox Text="{Binding Fullnames[4]}" Margin="40 2"/>
-            <TextBox Text="{Binding Fullnames[5]}" Margin="40 2"/>
-            <TextBox Text="{Binding Fullnames[6]}" Margin="40 2"/>
+            <TextBlock Text="Settings" FontFamily="{StaticResource LatoLight}" FontSize="32" HorizontalAlignment="Center"/>
+
+            <StackPanel Margin="30 0">
+
+                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable colors" />
+                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable sunday text" />
+                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable day off text" />
+                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable colors" />
+
+            </StackPanel>
         </StackPanel>
 
-        <!-- Settings -->
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Text="Settings" FontFamily="Tahoma" FontSize="24" HorizontalAlignment="Center" Margin="0 10 0 0"/>
-
-            <StackPanel Orientation="Horizontal">
-                <CheckBox/>
-                <TextBlock Text="Enable colors"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox/>
-                <TextBlock Text="Enable day off text"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox/>
-                <TextBlock Text="Enable sunday text"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <CheckBox/>
-                <TextBlock Text="Enable Colors"/>
-            </StackPanel>
-        </StackPanel>
+       
 
         <!-- Generate button -->
-        <StackPanel Grid.Row="1" Grid.Column="0">
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
             <Button Content="Generate" Command="{Binding GenerateCommand}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
