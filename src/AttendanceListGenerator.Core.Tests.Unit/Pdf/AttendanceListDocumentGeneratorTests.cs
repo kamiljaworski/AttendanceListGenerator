@@ -319,6 +319,64 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
             Assert.That(backgroundColor, Is.EqualTo(documentGenerator.DayOffBackgroundColor));
         }
 
+        [Test]
+        public void GenerateDocument_January2019DisabledSundaysTexts_CellsIndexThrowsException()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.EnableSundaysTexts = false;
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            TestDelegate getContent = () => content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[20].Cells[2].Elements[0]).Elements[0]).Content;
+
+            Assert.That(getContent, Throws.Exception);
+        }
+
+        [Test]
+        public void GenerateDocument_January2019DisabledHolidaysTexts_CellsIndexThrowsException()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.EnableHolidaysTexts = false;
+            Document document = documentGenerator.GenerateDocument();
+
+            string content;
+            TestDelegate getContent = () => content = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[1].Cells[2].Elements[0]).Elements[0]).Content;
+
+            Assert.That(getContent, Throws.Exception);
+        }
+
+        [Test]
+        public void GenerateDocument_January2019DisabledHolidaysTexts_SundayThe6thAllColumnsAreEqualToSunday()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.EnableHolidaysTexts = false;
+
+            Document document = documentGenerator.GenerateDocument();
+
+            string firstColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[2].Elements[0]).Elements[0]).Content;
+            string secondColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[3].Elements[0]).Elements[0]).Content;
+            string thirdColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[4].Elements[0]).Elements[0]).Content;
+            string fourthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[5].Elements[0]).Elements[0]).Content;
+            string fifthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[6].Elements[0]).Elements[0]).Content;
+            string sixthColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[7].Elements[0]).Elements[0]).Content;
+            string seventhColumn = ((Text)((Paragraph)document.Sections[0].LastTable.Rows[6].Cells[8].Elements[0]).Elements[0]).Content;
+            List<string> columnsList = new List<string> { firstColumn, secondColumn, thirdColumn, fourthColumn, fifthColumn, sixthColumn, seventhColumn };
+            Assert.That(columnsList, Is.All.EqualTo("SUNDAY"));
+        }
+
+
+        [Test]
+        public void GenerateDocument_January2019DisabledTableStretching_FirstRowsHeightIsEqualTo33()
+        {
+            AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
+            documentGenerator.EnableTableStretching = false;
+
+            Document document = documentGenerator.GenerateDocument();
+
+            var height = document.Sections[0].LastTable.Rows[0].Height;
+            Assert.That(height.ToString(), Is.EqualTo("33"));
+        }
+
         private AttendanceListDocumentGenerator GetAttendanceListDocumentGenerator()
         {
             IList<IPerson> people = new List<IPerson>

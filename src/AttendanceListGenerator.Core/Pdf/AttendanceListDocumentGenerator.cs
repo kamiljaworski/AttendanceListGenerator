@@ -14,13 +14,20 @@ namespace AttendanceListGenerator.Core.Pdf
         private const int _numberOfAdditionalColumns = 2;
         private const double _documentMargins = 30.0;
         private const int _fullnamesColumnWidth = 100;
+        private const int _fullnamesColumnWidthStretched = 104;
         private const int _firstColumnWidth = 25;
         private const int _secondColumnWidth = 30;
+        private const int _defaultFirstRowHeight = 33;
 
         public bool EnableColors { get; set; } = true;
+        public bool EnableHolidaysTexts { get; set; } = true;
+        public bool EnableSundaysTexts { get; set; } = true;
+        public bool EnableTableStretching { get; set; } = true;
+
         public Color FullnamesBackgroundColor { get; set; } = new Color(220, 220, 220);
         public Color DayOffBackgroundColor { get; set; } = new Color(192, 192, 192);
         public Color SaturdayBackgroundColor { get; set; } = new Color(215, 215, 215);
+
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
         {
@@ -158,11 +165,19 @@ namespace AttendanceListGenerator.Core.Pdf
                 if (currentHoliday != Holiday.None)
                     holidayText = _names.GetHolidayName(day.Holiday).ToUpper();
 
+                // Check if sundays texts are enabled
+                if (EnableSundaysTexts == false)
+                    sundayText = string.Empty;
+
+                // Check if holidays texts are enabled
+                if (EnableHolidaysTexts == false)
+                    holidayText = string.Empty;
+
                 for (int i = 0; i < _data.MaxNumberOfFullnames; ++i)
                 {
                     string currentColumnText;
 
-                    if (currentDay == DayOfWeek.Sunday && currentHoliday != Holiday.None && i % 2 == 0)
+                    if (currentDay == DayOfWeek.Sunday && currentHoliday != Holiday.None && (i % 2 == 0 || EnableHolidaysTexts == false))
                         currentColumnText = sundayText;
                     else if (currentDay == DayOfWeek.Sunday && currentHoliday != Holiday.None && i % 2 == 1)
                         currentColumnText = holidayText;
@@ -203,13 +218,19 @@ namespace AttendanceListGenerator.Core.Pdf
             table.Rows[0].Cells[0].Borders.Right.Visible = false;
             table.Rows[0].Cells[1].Borders.Right.Visible = false;
 
+            // Change first rows height
+            table.Rows[0].Height = _defaultFirstRowHeight;
+
             // Change first two columns width
             table.Columns[0].Width = _firstColumnWidth;
             table.Columns[1].Width = _secondColumnWidth;
 
+            // Get correct column width
+            int columnWidth = EnableTableStretching ? _fullnamesColumnWidthStretched : _fullnamesColumnWidth;
+
             // Change width of fullnames columns
             for (int i = 0; i < _data.MaxNumberOfFullnames; i++)
-                table.Columns[i + 2].Width = _fullnamesColumnWidth;
+                table.Columns[i + 2].Width = columnWidth;
 
             // Change table default font name and size
             table.Format.Font.Name = "Times New Roman";
