@@ -60,6 +60,8 @@ namespace AttendanceListGenerator.Core.IO
             return stringBuilder.ToString();
         }
 
+        public string GenerateJsonSettingsFilename() => "settings.json";
+
         private string GetStringWithZeroAtTheBegnning(int number)
         {
             // Format numbers like: '01', '06', '11' etc.

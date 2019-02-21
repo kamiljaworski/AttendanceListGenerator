@@ -34,6 +34,16 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
             Assert.That(executeGeneratePdfDocumentFilename, Throws.ArgumentNullException);
         }
 
+        [Test]
+        public void GenerateJsonSettingsFilename_ReturnsCorrectFilename()
+        {
+            FilenameGenerator fileNameGenerator = new FilenameGenerator(Mock.Of<ILocalizedNames>(), Mock.Of<IDateTimeProvider>());
+
+            string filename = fileNameGenerator.GenerateJsonSettingsFilename();
+
+            Assert.That(filename, Is.EqualTo("settings.json"));
+        }
+
         [TestCase(Month.January, 2019, "2019-02-06 19:25:32", "January_2019_06022019192532.pdf")]
         [TestCase(Month.May, 2016, "2018-06-01 11:01:02", "May_2016_01062018110102.pdf")]
         [TestCase(Month.December, 2001, "2006-12-01 05:32:16", "December_2001_01122006053216.pdf")]
