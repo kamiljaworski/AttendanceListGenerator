@@ -8,8 +8,10 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
     class FileSaverTests
     {
         private string _pdfFilename = "test.pdf";
+        private string _jsonFilename = "test.json";
         private string _directoryPath = "C:";
         private string _pdfFullPath => _directoryPath + "\\" + _pdfFilename;
+        private string _jsonFullPath => _directoryPath + "\\" + _jsonFilename;
 
         [SetUp]
         [TearDown]
@@ -17,6 +19,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
         {
             if (File.Exists(_pdfFullPath))
                 File.Delete(_pdfFullPath);
+
+            if (File.Exists(_jsonFullPath))
+                File.Delete(_jsonFullPath);
         }
 
         [Test]
@@ -65,6 +70,47 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
             documentSaver.SavePdfDocument(document, _directoryPath, _pdfFilename);
 
             FileAssert.Exists(_pdfFullPath);
+        }
+
+        [TestCase(null, "test", "test")]
+        [TestCase("", "test", "test")]
+        [TestCase("test", null, "test")]
+        [TestCase("test", "", "test")]
+        [TestCase("", "", "test")]
+        [TestCase("", "", "")]
+        [TestCase(null, null, "test")]
+        [TestCase(null, null, null)]
+        public void SaveJsonFile_NullOrEmptyStringArguments_ThrowsArgumentNullException(string json, string path, string filename)
+        {
+            FileSaver fileSacver = new FileSaver();
+
+            TestDelegate executeSavePdfDocument = () => fileSacver.SaveJsonFile(json, path, filename);
+
+            Assert.That(executeSavePdfDocument, Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void SaveJsonFile_CorrectData_CreatesFile()
+        {
+            FileSaver documentSaver = new FileSaver();
+            string json = "{\"EnableColors\":true,\"EnableHolidaysTexts\":false,\"EnableSundaysTexts\":true,\"EnableTableStretching\":true,"
+                        + "\"Fullnames\":[\"Adam Adams\",\"Tom Cruise\",\"Robert Kubica\"]}";
+
+            documentSaver.SaveJsonFile(json, _directoryPath, _jsonFilename);
+
+            FileAssert.Exists(_jsonFullPath);
+        }
+
+        [Test]
+        public void SaveJsonFile_CorrectData_ReturnsTrues()
+        {
+            FileSaver documentSaver = new FileSaver();
+            string json = "{\"EnableColors\":true,\"EnableHolidaysTexts\":false,\"EnableSundaysTexts\":true,\"EnableTableStretching\":true,"
+                        + "\"Fullnames\":[\"Adam Adams\",\"Tom Cruise\",\"Robert Kubica\"]}";
+
+            bool result = documentSaver.SaveJsonFile(json, _directoryPath, _jsonFilename);
+
+            Assert.That(result, Is.True);
         }
 
         private Document GetExampleDocument()

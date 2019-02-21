@@ -40,6 +40,9 @@
     <Reference Include="MigraDoc.RtfRendering, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MigraDoc.Improved.1.32.6372\lib\netstandard2.0\MigraDoc.RtfRendering.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp1_32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MigraDoc.Improved.1.32.6372\lib\netstandard2.0\PdfSharp1_32.dll</HintPath>
     </Reference>
@@ -86,6 +89,9 @@
     <Compile Include="IO\IFilenameGenerator.cs" />
     <Compile Include="IO\IFileOpener.cs" />
     <Compile Include="IO\IFileSaver.cs" />
+    <Compile Include="IO\ISerializer.cs" />
+    <Compile Include="IO\Settings.cs" />
+    <Compile Include="IO\SettingsSerializer.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGenerator.cs" />
     <Compile Include="Pdf\IAttendanceListDocumentGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

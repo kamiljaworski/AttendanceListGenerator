@@ -83,12 +83,12 @@ namespace AttendanceListGenerator.UI.ViewModels
             IList<IPerson> people = GetPeopleList();
 
             // Generate data
-            IDaysOffData daysOff = new DaysOffData(Year);
-            IAttendanceListData listData = new AttendanceListData(daysOff, people, Month, Year);
+            DaysOffData daysOff = new DaysOffData(Year);
+            AttendanceListData listData = new AttendanceListData(daysOff, people, Month, Year);
 
             // Create document generator
-            ILocalizedNames localizedNames = new LocalizedNames();
-            IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(listData, localizedNames);
+            LocalizedNames localizedNames = new LocalizedNames();
+            AttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(listData, localizedNames);
 
             // Set document generator settings
             documentGenerator.EnableColors = EnableColors;
@@ -100,17 +100,17 @@ namespace AttendanceListGenerator.UI.ViewModels
             Document document = documentGenerator.GenerateDocument();
 
             // Get directory path and filename
-            IDirectoryProvider directoryProvider = new DirectoryProvider(localizedNames);
-            IFilenameGenerator filenameGenerator = new FilenameGenerator(localizedNames, _dateTimeProvider);
+            DirectoryProvider directoryProvider = new DirectoryProvider(localizedNames);
+            FilenameGenerator filenameGenerator = new FilenameGenerator(localizedNames, _dateTimeProvider);
             string path = directoryProvider.GetDocumentsDirectoryPath();
             string filename = filenameGenerator.GeneratePdfDocumentFilename(listData);
 
             // Save document
-            IFileSaver fileSaver = new FileSaver();
+            FileSaver fileSaver = new FileSaver();
             fileSaver.SavePdfDocument(document, path, filename);
 
             // And open it
-            IFileOpener fileOpener = new FileOpener();
+            FileOpener fileOpener = new FileOpener();
             fileOpener.OpenFile(path, filename);
         }
 

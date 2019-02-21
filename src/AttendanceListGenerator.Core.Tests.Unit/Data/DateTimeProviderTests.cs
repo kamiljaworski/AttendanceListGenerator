@@ -13,7 +13,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Data
 
             DateTime now = dateTimeProvider.Now;
 
-            Assert.That(now, Is.EqualTo(DateTime.Now).Within(TimeSpan.FromMilliseconds(2)));
+            Assert.That(now, Is.EqualTo(DateTime.Now).Within(TimeSpan.FromMilliseconds(5)));
         }
     }
 }

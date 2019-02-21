@@ -72,6 +72,7 @@
     <Compile Include="IO\DirectoryProviderTests.cs" />
     <Compile Include="IO\FilenameGeneratorTests.cs" />
     <Compile Include="IO\FileSaverTests.cs" />
+    <Compile Include="IO\SettingsSerializerTests.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
