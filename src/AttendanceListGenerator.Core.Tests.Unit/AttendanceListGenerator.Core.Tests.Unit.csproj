@@ -71,6 +71,7 @@
     <Compile Include="Helpers\EnumNavigatorTests.cs" />
     <Compile Include="IO\DirectoryProviderTests.cs" />
     <Compile Include="IO\FilenameGeneratorTests.cs" />
+    <Compile Include="IO\FileReaderTests.cs" />
     <Compile Include="IO\FileSaverTests.cs" />
     <Compile Include="IO\SettingsSerializerTests.cs" />
     <Compile Include="Pdf\AttendanceListDocumentGeneratorTests.cs" />

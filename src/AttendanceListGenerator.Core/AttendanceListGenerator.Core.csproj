@@ -84,10 +84,12 @@
     <Compile Include="IO\DirectoryProvider.cs" />
     <Compile Include="IO\FilenameGenerator.cs" />
     <Compile Include="IO\FileOpener.cs" />
+    <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\FileSaver.cs" />
     <Compile Include="IO\IDirectoryProvider.cs" />
     <Compile Include="IO\IFilenameGenerator.cs" />
     <Compile Include="IO\IFileOpener.cs" />
+    <Compile Include="IO\IFileReader.cs" />
     <Compile Include="IO\IFileSaver.cs" />
     <Compile Include="IO\ISerializer.cs" />
     <Compile Include="IO\Settings.cs" />

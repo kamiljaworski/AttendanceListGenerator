@@ -84,9 +84,9 @@ namespace AttendanceListGenerator.Core.Tests.Unit.IO
         {
             FileSaver fileSacver = new FileSaver();
 
-            TestDelegate executeSavePdfDocument = () => fileSacver.SaveJsonFile(json, path, filename);
+            TestDelegate executeSaveJsonFile = () => fileSacver.SaveJsonFile(json, path, filename);
 
-            Assert.That(executeSavePdfDocument, Throws.ArgumentNullException);
+            Assert.That(executeSaveJsonFile, Throws.ArgumentNullException);
         }
 
         [Test]
