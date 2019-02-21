@@ -25,6 +25,9 @@ namespace AttendanceListGenerator.UI.ViewModels
         public IList<string> Fullnames { get; set; }
 
         public bool EnableColors { get; set; } = true;
+        public bool EnableHolidaysTexts { get; set; } = true;
+        public bool EnableSundaysTexts { get; set; } = true;
+        public bool EnableTableStretching { get; set; } = true;
 
         public ICommand NextYearCommand { get; private set; }
         public ICommand PreviousYearCommand { get; private set; }
@@ -89,6 +92,9 @@ namespace AttendanceListGenerator.UI.ViewModels
 
             // Set document generator settings
             documentGenerator.EnableColors = EnableColors;
+            documentGenerator.EnableHolidaysTexts = EnableHolidaysTexts;
+            documentGenerator.EnableSundaysTexts = EnableSundaysTexts;
+            documentGenerator.EnableTableStretching = EnableTableStretching;
 
             // Generate a document
             Document document = documentGenerator.GenerateDocument();

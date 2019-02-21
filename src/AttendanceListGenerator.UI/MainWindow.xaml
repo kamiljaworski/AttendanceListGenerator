@@ -84,13 +84,13 @@
             </Grid>
 
             <!-- Settings heading -->
-            <TextBlock Text="Settings" Style="{StaticResource Heading}" Margin="0"/>
+            <TextBlock Text="Settings" Style="{StaticResource Heading}" Margin="0 0 0 10"/>
 
             <StackPanel Margin="30 0">
-                <CheckBox IsChecked="{Binding EnableColors}" Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable colors" />
-                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable sunday text" />
-                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable day off text" />
-                <CheckBox Margin="0 0 5 0" FontFamily="{StaticResource LatoRegular}" FontSize="14" Content="Enable colors" />
+                <CheckBox Content="Enable colors" IsChecked="{Binding EnableColors}"/>
+                <CheckBox Content="Enable holidays texts" IsChecked="{Binding EnableHolidaysTexts}"/>
+                <CheckBox Content="Enable sundays texts" IsChecked="{Binding EnableSundaysTexts}"/>
+                <CheckBox Content="Enable table stretching"  IsChecked="{Binding EnableTableStretching}"/>
             </StackPanel>
         </StackPanel>
 

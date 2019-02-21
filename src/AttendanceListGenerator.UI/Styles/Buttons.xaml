@@ -48,4 +48,11 @@
     </Style>
     <!--#endregion-->
 
+    <!-- Default Checkbox style -->
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0 0 5 0"/>
+    </Style>
+
 </ResourceDictionary>
