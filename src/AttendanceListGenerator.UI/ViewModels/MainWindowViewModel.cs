@@ -7,6 +7,7 @@ using MigraDoc.DocumentObjectModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Input;
 
 namespace AttendanceListGenerator.UI.ViewModels
@@ -40,13 +41,18 @@ namespace AttendanceListGenerator.UI.ViewModels
             if (dateTimeProvider == null)
                 throw new ArgumentNullException("DateTimeProvider cannot be null");
 
-            // Create Fullnames list and fill it
-            Fullnames = new List<string>();
-            for (int i = 0; i < _numberOfFullnames; i++)
-                Fullnames.Add(string.Empty);
-
             _dateTimeProvider = dateTimeProvider;
             DateTime now = _dateTimeProvider.Now;
+
+            CreateApplicationDirectories();
+
+            Settings settings = DeserializeSettings();
+
+            if (settings != null)
+                UseSettings(settings);
+            else
+                CreateListOfEmptyFullnames();
+
 
             // Set current Month and Year
             Month = (Month)now.Month;
@@ -58,6 +64,63 @@ namespace AttendanceListGenerator.UI.ViewModels
             NextMonthCommand = new RelayCommand(NextMonth);
             PreviousMonthCommand = new RelayCommand(PreviousMonth);
             GenerateCommand = new RelayCommand(Generate);
+        }
+
+        private void CreateApplicationDirectories()
+        {
+            LocalizedNames localizedNames = new LocalizedNames();
+            DirectoryProvider directoryProvider = new DirectoryProvider(localizedNames);
+
+            if (!Directory.Exists(directoryProvider.GetApplicationDirectoryPath()))
+                Directory.CreateDirectory(directoryProvider.GetApplicationDirectoryPath());
+
+            if (!Directory.Exists(directoryProvider.GetDocumentsDirectoryPath()))
+                Directory.CreateDirectory(directoryProvider.GetDocumentsDirectoryPath());
+        }
+
+        private Settings DeserializeSettings()
+        {
+            try
+            {
+                LocalizedNames localizedNames = new LocalizedNames();
+                DirectoryProvider directoryProvider = new DirectoryProvider(localizedNames);
+                FilenameGenerator filenameGenerator = new FilenameGenerator(localizedNames, _dateTimeProvider);
+
+                string applicationDirectory = directoryProvider.GetApplicationDirectoryPath();
+                string settingsFilename = filenameGenerator.GenerateJsonSettingsFilename();
+
+                FileReader fileReader = new FileReader();
+                string json = fileReader.ReadJsonFile(applicationDirectory, settingsFilename);
+
+                SettingsSerializer serializer = new SettingsSerializer();
+                return serializer.Deserialize(json);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private void UseSettings(Settings settings)
+        {
+            EnableColors = settings.EnableColors;
+            EnableHolidaysTexts = settings.EnableHolidaysTexts;
+            EnableSundaysTexts = settings.EnableSundaysTexts;
+            EnableTableStretching = settings.EnableTableStretching;
+
+            Fullnames = new List<string>();
+            for (int i = 0; i < _numberOfFullnames; i++)
+                if (i < settings.Fullnames.Count)
+                    Fullnames.Add(settings.Fullnames[i]);
+                else
+                    Fullnames.Add(string.Empty);
+        }
+
+        private void CreateListOfEmptyFullnames()
+        {
+            Fullnames = new List<string>();
+            for (int i = 0; i < _numberOfFullnames; i++)
+                Fullnames.Add(string.Empty);
         }
 
         private void NextYear() => Year = (Year < _maxYear) ? ++Year : Year;
@@ -112,6 +175,8 @@ namespace AttendanceListGenerator.UI.ViewModels
             // And open it
             FileOpener fileOpener = new FileOpener();
             fileOpener.OpenFile(path, filename);
+
+            SerializeSettings(directoryProvider, filenameGenerator, fileSaver);
         }
 
         private IList<IPerson> GetPeopleList()
@@ -123,6 +188,30 @@ namespace AttendanceListGenerator.UI.ViewModels
                     people.Add(new Person(fullname));
 
             return people;
+        }
+
+        private void SerializeSettings(IDirectoryProvider directoryProvider, IFilenameGenerator filenameGenerator, IFileSaver fileSaver)
+        {
+            // Create Settings object
+            Settings settings = new Settings
+            {
+                EnableColors = EnableColors,
+                EnableHolidaysTexts = EnableHolidaysTexts,
+                EnableSundaysTexts = EnableSundaysTexts,
+                EnableTableStretching = EnableTableStretching,
+                Fullnames = Fullnames
+            };
+
+            // Serialize settings
+            SettingsSerializer serializer = new SettingsSerializer();
+            string json = serializer.Serialize(settings);
+
+            // Get directory and filename
+            string path = directoryProvider.GetApplicationDirectoryPath();
+            string filename = filenameGenerator.GenerateJsonSettingsFilename();
+
+            // Save serialized setting to file
+            fileSaver.SaveJsonFile(json, path, filename);
         }
     }
 }
