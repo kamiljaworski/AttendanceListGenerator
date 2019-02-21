@@ -220,7 +220,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_January2019WithoutDocumentColors_FullnamesRowsColorIsEqualToZero()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-            documentGenerator.CanAddColorsToTheDocument = false;
+            documentGenerator.EnableColors = false;
 
             Document document = documentGenerator.GenerateDocument();
 
@@ -232,7 +232,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_January2019WithoutDocumentColors_SundayThe13thRowsColorIsEqualToZero()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-            documentGenerator.CanAddColorsToTheDocument = false;
+            documentGenerator.EnableColors = false;
 
             Document document = documentGenerator.GenerateDocument();
 
@@ -244,7 +244,7 @@ namespace AttendanceListGenerator.Core.Tests.Unit.Pdf
         public void GenerateDocument_January2019WithoutDocumentColors_SaturdayThe19thRowsColorIsEqualToZero()
         {
             AttendanceListDocumentGenerator documentGenerator = GetAttendanceListDocumentGenerator();
-            documentGenerator.CanAddColorsToTheDocument = false;
+            documentGenerator.EnableColors = false;
 
             Document document = documentGenerator.GenerateDocument();
 

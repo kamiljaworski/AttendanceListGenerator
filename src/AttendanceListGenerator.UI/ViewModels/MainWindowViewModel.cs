@@ -24,6 +24,8 @@ namespace AttendanceListGenerator.UI.ViewModels
         public int Year { get; private set; }
         public IList<string> Fullnames { get; set; }
 
+        public bool EnableColors { get; set; } = true;
+
         public ICommand NextYearCommand { get; private set; }
         public ICommand PreviousYearCommand { get; private set; }
         public ICommand NextMonthCommand { get; private set; }
@@ -84,6 +86,9 @@ namespace AttendanceListGenerator.UI.ViewModels
             // Create document generator
             ILocalizedNames localizedNames = new LocalizedNames();
             IAttendanceListDocumentGenerator documentGenerator = new AttendanceListDocumentGenerator(listData, localizedNames);
+
+            // Set document generator settings
+            documentGenerator.EnableColors = EnableColors;
 
             // Generate a document
             Document document = documentGenerator.GenerateDocument();
