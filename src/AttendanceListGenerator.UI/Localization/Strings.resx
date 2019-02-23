@@ -144,6 +144,9 @@
   <data name="CorpusChristi" xml:space="preserve">
     <value>Corpus Christi</value>
   </data>
+  <data name="Data" xml:space="preserve">
+    <value>Month of the year</value>
+  </data>
   <data name="December" xml:space="preserve">
     <value>December</value>
   </data>
@@ -159,6 +162,18 @@
   <data name="EasterSunday" xml:space="preserve">
     <value>Easter</value>
   </data>
+  <data name="EnableColors" xml:space="preserve">
+    <value>Enable colors</value>
+  </data>
+  <data name="EnableHolidaysTexts" xml:space="preserve">
+    <value>Enable printing holidays</value>
+  </data>
+  <data name="EnableSundaysTexts" xml:space="preserve">
+    <value>Enable printing sundays</value>
+  </data>
+  <data name="EnableTableStretching" xml:space="preserve">
+    <value>Enable table stretching</value>
+  </data>
   <data name="Epiphany" xml:space="preserve">
     <value>Epiphany</value>
   </data>
@@ -170,6 +185,12 @@
   </data>
   <data name="FridayAbbreviation" xml:space="preserve">
     <value>Fri.</value>
+  </data>
+  <data name="Fullname" xml:space="preserve">
+    <value>Fullname</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
   </data>
   <data name="IndependenceDay" xml:space="preserve">
     <value>Independence Day</value>
@@ -198,6 +219,9 @@
   <data name="MondayAbbreviation" xml:space="preserve">
     <value>Mon.</value>
   </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
   <data name="NewYearsDay" xml:space="preserve">
     <value>New Years Day</value>
   </data>
@@ -207,6 +231,9 @@
   <data name="October" xml:space="preserve">
     <value>October</value>
   </data>
+  <data name="PeopleList" xml:space="preserve">
+    <value>List of people</value>
+  </data>
   <data name="Saturday" xml:space="preserve">
     <value>Saturday</value>
   </data>
@@ -215,6 +242,9 @@
   </data>
   <data name="September" xml:space="preserve">
     <value>September</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>Sunday</value>
@@ -239,5 +269,8 @@
   </data>
   <data name="WednesdayAbbreviation" xml:space="preserve">
     <value>Wed.</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
   </data>
 </root>

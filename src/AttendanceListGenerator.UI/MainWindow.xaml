@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AttendanceListGenerator.UI"
+        xmlns:localization="clr-namespace:AttendanceListGenerator.UI.Localization"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid MaxWidth="500">
@@ -20,25 +21,25 @@
         <!-- People TextBoxes -->
         <StackPanel Grid.RowSpan="2" Grid.Column="0">
             <!-- People heading -->
-            <TextBlock Text="People" Style="{StaticResource Heading}" />
+            <TextBlock Text="{x:Static localization:Strings.PeopleList}" Style="{StaticResource Heading}" />
 
             <!-- Fullname TextBoxes -->
-            <TextBox Text="{Binding Fullnames[0]}" Tag="Fullname" />
-            <TextBox Text="{Binding Fullnames[1]}" Tag="Fullname" />
-            <TextBox Text="{Binding Fullnames[2]}" Tag="Fullname" />
-            <TextBox Text="{Binding Fullnames[3]}" Tag="Fullname" />
-            <TextBox Text="{Binding Fullnames[4]}" Tag="Fullname" />
-            <TextBox Text="{Binding Fullnames[5]}" Tag="Fullname" />
-            <TextBox Text="{Binding Fullnames[6]}" Tag="Fullname" />
+            <TextBox Text="{Binding Fullnames[0]}" Tag="{x:Static localization:Strings.Fullname}" />
+            <TextBox Text="{Binding Fullnames[1]}" Tag="{x:Static localization:Strings.Fullname}" />
+            <TextBox Text="{Binding Fullnames[2]}" Tag="{x:Static localization:Strings.Fullname}" />
+            <TextBox Text="{Binding Fullnames[3]}" Tag="{x:Static localization:Strings.Fullname}" />
+            <TextBox Text="{Binding Fullnames[4]}" Tag="{x:Static localization:Strings.Fullname}" />
+            <TextBox Text="{Binding Fullnames[5]}" Tag="{x:Static localization:Strings.Fullname}" />
+            <TextBox Text="{Binding Fullnames[6]}" Tag="{x:Static localization:Strings.Fullname}" />
         </StackPanel>
         
         <!-- Data -->
         <StackPanel Grid.Row="0" Grid.Column="1">
             <!-- Data heading -->
-            <TextBlock Text="Data" Style="{StaticResource Heading}" />
+            <TextBlock Text="{x:Static localization:Strings.Data}" Style="{StaticResource Heading}" />
 
             <!-- Year hint -->
-            <TextBlock Text="Year" Style="{StaticResource Hint}"/>            
+            <TextBlock Text="{x:Static localization:Strings.Year}" Style="{StaticResource Hint}"/>            
             <Grid Margin="50 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -61,7 +62,7 @@
             </Grid>
 
             <!-- Month hint -->
-            <TextBlock Text="Month" Style="{StaticResource Hint}"/>
+            <TextBlock Text="{x:Static localization:Strings.Month}" Style="{StaticResource Hint}"/>
             <Grid Margin="30 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -84,19 +85,19 @@
             </Grid>
 
             <!-- Settings heading -->
-            <TextBlock Text="Settings" Style="{StaticResource Heading}" Margin="0 0 0 10"/>
+            <TextBlock Text="{x:Static localization:Strings.Settings}" Style="{StaticResource Heading}" Margin="0 0 0 10"/>
 
             <StackPanel Margin="30 0">
-                <CheckBox Content="Enable colors" IsChecked="{Binding EnableColors}"/>
-                <CheckBox Content="Enable holidays texts" IsChecked="{Binding EnableHolidaysTexts}"/>
-                <CheckBox Content="Enable sundays texts" IsChecked="{Binding EnableSundaysTexts}"/>
-                <CheckBox Content="Enable table stretching"  IsChecked="{Binding EnableTableStretching}"/>
+                <CheckBox Content="{x:Static localization:Strings.EnableColors}" IsChecked="{Binding EnableColors}"/>
+                <CheckBox Content="{x:Static localization:Strings.EnableHolidaysTexts}" IsChecked="{Binding EnableHolidaysTexts}"/>
+                <CheckBox Content="{x:Static localization:Strings.EnableSundaysTexts}" IsChecked="{Binding EnableSundaysTexts}"/>
+                <CheckBox Content="{x:Static localization:Strings.EnableTableStretching}"  IsChecked="{Binding EnableTableStretching}"/>
             </StackPanel>
         </StackPanel>
 
         <!-- Generate button -->
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom">
-            <Button Content="Generate" Command="{Binding GenerateCommand}" HorizontalAlignment="Center"/>
+            <Button Content="{x:Static localization:Strings.Generate}" Command="{Binding GenerateCommand}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>

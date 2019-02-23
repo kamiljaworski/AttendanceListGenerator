@@ -22,7 +22,7 @@ namespace AttendanceListGenerator.UI.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace AttendanceListGenerator.UI.Localization {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AttendanceListGenerator.UI.Localization.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace AttendanceListGenerator.UI.Localization {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to All Saints&apos; Day.
         /// </summary>
-        internal static string AllSaintsDay {
+        public static string AllSaintsDay {
             get {
                 return ResourceManager.GetString("AllSaintsDay", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Attendance List Generator.
         /// </summary>
-        internal static string ApplicationDirectoryName {
+        public static string ApplicationDirectoryName {
             get {
                 return ResourceManager.GetString("ApplicationDirectoryName", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to April.
         /// </summary>
-        internal static string April {
+        public static string April {
             get {
                 return ResourceManager.GetString("April", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Armed Forces Day.
         /// </summary>
-        internal static string ArmedForcesDay {
+        public static string ArmedForcesDay {
             get {
                 return ResourceManager.GetString("ArmedForcesDay", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to August.
         /// </summary>
-        internal static string August {
+        public static string August {
             get {
                 return ResourceManager.GetString("August", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Kamil Jaworski.
         /// </summary>
-        internal static string Author {
+        public static string Author {
             get {
                 return ResourceManager.GetString("Author", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Christmas.
         /// </summary>
-        internal static string Christmas {
+        public static string Christmas {
             get {
                 return ResourceManager.GetString("Christmas", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Constitution Day.
         /// </summary>
-        internal static string ConstitutionDay {
+        public static string ConstitutionDay {
             get {
                 return ResourceManager.GetString("ConstitutionDay", resourceCulture);
             }
@@ -135,16 +135,25 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Corpus Christi.
         /// </summary>
-        internal static string CorpusChristi {
+        public static string CorpusChristi {
             get {
                 return ResourceManager.GetString("CorpusChristi", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month of the year.
+        /// </summary>
+        public static string Data {
+            get {
+                return ResourceManager.GetString("Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to December.
         /// </summary>
-        internal static string December {
+        public static string December {
             get {
                 return ResourceManager.GetString("December", resourceCulture);
             }
@@ -153,7 +162,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to The Descend of the Holy Spirit.
         /// </summary>
-        internal static string DescendOfTheHolySpirit {
+        public static string DescendOfTheHolySpirit {
             get {
                 return ResourceManager.GetString("DescendOfTheHolySpirit", resourceCulture);
             }
@@ -162,7 +171,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Documents.
         /// </summary>
-        internal static string DocumentsDirectoryName {
+        public static string DocumentsDirectoryName {
             get {
                 return ResourceManager.GetString("DocumentsDirectoryName", resourceCulture);
             }
@@ -171,7 +180,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Easter Monday.
         /// </summary>
-        internal static string EasterMonday {
+        public static string EasterMonday {
             get {
                 return ResourceManager.GetString("EasterMonday", resourceCulture);
             }
@@ -180,16 +189,52 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Easter.
         /// </summary>
-        internal static string EasterSunday {
+        public static string EasterSunday {
             get {
                 return ResourceManager.GetString("EasterSunday", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable colors.
+        /// </summary>
+        public static string EnableColors {
+            get {
+                return ResourceManager.GetString("EnableColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable printing holidays.
+        /// </summary>
+        public static string EnableHolidaysTexts {
+            get {
+                return ResourceManager.GetString("EnableHolidaysTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable printing sundays.
+        /// </summary>
+        public static string EnableSundaysTexts {
+            get {
+                return ResourceManager.GetString("EnableSundaysTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable table stretching.
+        /// </summary>
+        public static string EnableTableStretching {
+            get {
+                return ResourceManager.GetString("EnableTableStretching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Epiphany.
         /// </summary>
-        internal static string Epiphany {
+        public static string Epiphany {
             get {
                 return ResourceManager.GetString("Epiphany", resourceCulture);
             }
@@ -198,7 +243,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to February.
         /// </summary>
-        internal static string February {
+        public static string February {
             get {
                 return ResourceManager.GetString("February", resourceCulture);
             }
@@ -207,7 +252,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Friday.
         /// </summary>
-        internal static string Friday {
+        public static string Friday {
             get {
                 return ResourceManager.GetString("Friday", resourceCulture);
             }
@@ -216,16 +261,34 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Fri..
         /// </summary>
-        internal static string FridayAbbreviation {
+        public static string FridayAbbreviation {
             get {
                 return ResourceManager.GetString("FridayAbbreviation", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fullname.
+        /// </summary>
+        public static string Fullname {
+            get {
+                return ResourceManager.GetString("Fullname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Independence Day.
         /// </summary>
-        internal static string IndependenceDay {
+        public static string IndependenceDay {
             get {
                 return ResourceManager.GetString("IndependenceDay", resourceCulture);
             }
@@ -234,7 +297,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to January.
         /// </summary>
-        internal static string January {
+        public static string January {
             get {
                 return ResourceManager.GetString("January", resourceCulture);
             }
@@ -243,7 +306,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to July.
         /// </summary>
-        internal static string July {
+        public static string July {
             get {
                 return ResourceManager.GetString("July", resourceCulture);
             }
@@ -252,7 +315,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to June.
         /// </summary>
-        internal static string June {
+        public static string June {
             get {
                 return ResourceManager.GetString("June", resourceCulture);
             }
@@ -261,7 +324,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Labour Day.
         /// </summary>
-        internal static string LabourDay {
+        public static string LabourDay {
             get {
                 return ResourceManager.GetString("LabourDay", resourceCulture);
             }
@@ -270,7 +333,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to March.
         /// </summary>
-        internal static string March {
+        public static string March {
             get {
                 return ResourceManager.GetString("March", resourceCulture);
             }
@@ -279,7 +342,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to May.
         /// </summary>
-        internal static string May {
+        public static string May {
             get {
                 return ResourceManager.GetString("May", resourceCulture);
             }
@@ -288,7 +351,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Monday.
         /// </summary>
-        internal static string Monday {
+        public static string Monday {
             get {
                 return ResourceManager.GetString("Monday", resourceCulture);
             }
@@ -297,16 +360,25 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Mon..
         /// </summary>
-        internal static string MondayAbbreviation {
+        public static string MondayAbbreviation {
             get {
                 return ResourceManager.GetString("MondayAbbreviation", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Years Day.
         /// </summary>
-        internal static string NewYearsDay {
+        public static string NewYearsDay {
             get {
                 return ResourceManager.GetString("NewYearsDay", resourceCulture);
             }
@@ -315,7 +387,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to November.
         /// </summary>
-        internal static string November {
+        public static string November {
             get {
                 return ResourceManager.GetString("November", resourceCulture);
             }
@@ -324,16 +396,25 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to October.
         /// </summary>
-        internal static string October {
+        public static string October {
             get {
                 return ResourceManager.GetString("October", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List of people.
+        /// </summary>
+        public static string PeopleList {
+            get {
+                return ResourceManager.GetString("PeopleList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
-        internal static string Saturday {
+        public static string Saturday {
             get {
                 return ResourceManager.GetString("Saturday", resourceCulture);
             }
@@ -342,7 +423,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Sat..
         /// </summary>
-        internal static string SaturdayAbbreviation {
+        public static string SaturdayAbbreviation {
             get {
                 return ResourceManager.GetString("SaturdayAbbreviation", resourceCulture);
             }
@@ -351,16 +432,25 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to September.
         /// </summary>
-        internal static string September {
+        public static string September {
             get {
                 return ResourceManager.GetString("September", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sunday.
         /// </summary>
-        internal static string Sunday {
+        public static string Sunday {
             get {
                 return ResourceManager.GetString("Sunday", resourceCulture);
             }
@@ -369,7 +459,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Sun..
         /// </summary>
-        internal static string SundayAbbreviation {
+        public static string SundayAbbreviation {
             get {
                 return ResourceManager.GetString("SundayAbbreviation", resourceCulture);
             }
@@ -378,7 +468,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Thursday.
         /// </summary>
-        internal static string Thursday {
+        public static string Thursday {
             get {
                 return ResourceManager.GetString("Thursday", resourceCulture);
             }
@@ -387,7 +477,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Thu..
         /// </summary>
-        internal static string ThursdayAbbreviation {
+        public static string ThursdayAbbreviation {
             get {
                 return ResourceManager.GetString("ThursdayAbbreviation", resourceCulture);
             }
@@ -396,7 +486,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Tuesday.
         /// </summary>
-        internal static string Tuesday {
+        public static string Tuesday {
             get {
                 return ResourceManager.GetString("Tuesday", resourceCulture);
             }
@@ -405,7 +495,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Tue..
         /// </summary>
-        internal static string TuesdayAbbreviation {
+        public static string TuesdayAbbreviation {
             get {
                 return ResourceManager.GetString("TuesdayAbbreviation", resourceCulture);
             }
@@ -414,7 +504,7 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Wednesday.
         /// </summary>
-        internal static string Wednesday {
+        public static string Wednesday {
             get {
                 return ResourceManager.GetString("Wednesday", resourceCulture);
             }
@@ -423,9 +513,18 @@ namespace AttendanceListGenerator.UI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Wed..
         /// </summary>
-        internal static string WednesdayAbbreviation {
+        public static string WednesdayAbbreviation {
             get {
                 return ResourceManager.GetString("WednesdayAbbreviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
             }
         }
     }
