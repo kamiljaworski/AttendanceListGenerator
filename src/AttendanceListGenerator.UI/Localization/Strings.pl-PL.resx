@@ -120,8 +120,8 @@
   <data name="AllSaintsDay" xml:space="preserve">
     <value>Wszystkich Świętych</value>
   </data>
-  <data name="ApplicationDirectoryName" xml:space="preserve">
-    <value>Generator List Obecności</value>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Generator list obecności</value>
   </data>
   <data name="April" xml:space="preserve">
     <value>Kwiecień</value>

@@ -120,8 +120,8 @@
   <data name="AllSaintsDay" xml:space="preserve">
     <value>All Saints' Day</value>
   </data>
-  <data name="ApplicationDirectoryName" xml:space="preserve">
-    <value>Attendance List Generator</value>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Attendance list generator</value>
   </data>
   <data name="April" xml:space="preserve">
     <value>April</value>

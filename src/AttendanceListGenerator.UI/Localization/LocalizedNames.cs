@@ -27,7 +27,7 @@ namespace AttendanceListGenerator.UI.Localization
         }
 
         public string DocumentAuthor => GetLocalizedString("Author");
-        public string ApplicationDirectoryName => GetLocalizedString("ApplicationDirectoryName");
+        public string ApplicationDirectoryName => GetLocalizedString("ApplicationName");
         public string DocumentsDirectoryName => GetLocalizedString("DocumentsDirectoryName");
         public string GetDayOfWeekName(DayOfWeek dayOfWeek) => GetLocalizedString(dayOfWeek.ToString());
         public string GetMonthName(Month month) => month == Month.None ? string.Empty : GetLocalizedString(month.ToString());

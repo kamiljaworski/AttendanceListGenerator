@@ -70,11 +70,11 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attendance List Generator.
+        ///   Looks up a localized string similar to Attendance list generator.
         /// </summary>
-        public static string ApplicationDirectoryName {
+        public static string ApplicationName {
             get {
-                return ResourceManager.GetString("ApplicationDirectoryName", resourceCulture);
+                return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
         
