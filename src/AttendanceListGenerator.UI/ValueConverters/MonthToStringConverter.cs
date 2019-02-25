@@ -10,7 +10,7 @@ namespace AttendanceListGenerator.UI.ValueConverters
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is Month month))
-                return value.ToString();
+                return value != null ? value.ToString() : string.Empty;
 
             LocalizedNames names = new LocalizedNames();
 
