@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace AttendanceListGenerator.UI.Tests.Unit.ValueConverters
 {
-    class MonthToStringTests
+    class MonthToStringConverterTests
     {
         [TestCase("pl-PL", Month.January, "Styczeń")]
         [TestCase("pl-PL", Month.February, "Luty")]
