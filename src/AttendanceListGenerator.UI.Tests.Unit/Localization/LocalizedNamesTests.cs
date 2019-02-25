@@ -21,9 +21,9 @@ namespace AttendanceListGenerator.UI.Tests.Unit.Localization
             Assert.That(result, Is.EqualTo("Kamil Jaworski"));
         }
 
-        [TestCase("pl-PL", "Generator List Obecności")]
-        [TestCase("en-US", "Attendance List Generator")]
-        [TestCase("de-de", "Attendance List Generator")]
+        [TestCase("pl-PL", "Generator list obecności")]
+        [TestCase("en-US", "Attendance list generator")]
+        [TestCase("de-de", "Attendance list generator")]
         public void ApplicationDirectoryName_GivenCulture_ReturnsGivenName(string cultureCode, string expectedResult)
         {
             UseCulture(cultureCode);

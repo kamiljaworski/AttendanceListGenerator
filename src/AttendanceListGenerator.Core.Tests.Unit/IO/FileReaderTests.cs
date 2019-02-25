@@ -5,6 +5,9 @@ using System.IO;
 
 namespace AttendanceListGenerator.Core.Tests.Unit.IO
 {
+    /// <summary>
+    /// To pass these tests you have to run them as administrator
+    /// </summary>
     class FileReaderTests
     {
         private string _jsonFilename = "test.json";
