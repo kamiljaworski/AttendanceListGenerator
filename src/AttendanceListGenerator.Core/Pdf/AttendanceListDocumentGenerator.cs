@@ -24,9 +24,9 @@ namespace AttendanceListGenerator.Core.Pdf
         public bool EnableSundaysTexts { get; set; } = true;
         public bool EnableTableStretching { get; set; } = true;
 
-        public Color FullnamesBackgroundColor { get; set; } = new Color(220, 220, 220);
-        public Color DayOffBackgroundColor { get; set; } = new Color(192, 192, 192);
-        public Color SaturdayBackgroundColor { get; set; } = new Color(215, 215, 215);
+        public Color FullnamesBackgroundColor { get; set; } = new Color(192, 192, 192);
+        public Color DayOffBackgroundColor { get; set; } = new Color(133, 133, 133);
+        public Color SaturdayBackgroundColor { get; set; } = new Color(164, 164, 164);
 
 
         public AttendanceListDocumentGenerator(IAttendanceListData data, ILocalizedNames names)
