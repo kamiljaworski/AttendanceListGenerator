@@ -13,8 +13,8 @@ namespace AttendanceListGenerator.Core.Pdf
 
         private const int _numberOfAdditionalColumns = 2;
         private const double _documentMargins = 30.0;
-        private const int _fullnamesColumnWidth = 98;
-        private const int _fullnamesColumnWidthStretched = 102;
+        private const int _fullnamesColumnWidth = 100;
+        private const int _fullnamesColumnWidthStretched = 104;
         private const int _firstColumnWidth = 25;
         private const int _secondColumnWidth = 32;
         private const int _defaultFirstRowHeight = 33;
