@@ -259,7 +259,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fri..
+        ///   Looks up a localized string similar to fri..
         /// </summary>
         public static string FridayAbbreviation {
             get {
@@ -358,7 +358,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mon..
+        ///   Looks up a localized string similar to mon..
         /// </summary>
         public static string MondayAbbreviation {
             get {
@@ -421,7 +421,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sat..
+        ///   Looks up a localized string similar to sat..
         /// </summary>
         public static string SaturdayAbbreviation {
             get {
@@ -457,7 +457,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sun..
+        ///   Looks up a localized string similar to sun..
         /// </summary>
         public static string SundayAbbreviation {
             get {
@@ -475,7 +475,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thu..
+        ///   Looks up a localized string similar to thu..
         /// </summary>
         public static string ThursdayAbbreviation {
             get {
@@ -493,7 +493,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tue..
+        ///   Looks up a localized string similar to tue..
         /// </summary>
         public static string TuesdayAbbreviation {
             get {
@@ -511,7 +511,7 @@ namespace AttendanceListGenerator.UI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wed..
+        ///   Looks up a localized string similar to wed..
         /// </summary>
         public static string WednesdayAbbreviation {
             get {

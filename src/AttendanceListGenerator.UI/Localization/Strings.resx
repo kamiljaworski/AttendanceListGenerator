@@ -184,7 +184,7 @@
     <value>Friday</value>
   </data>
   <data name="FridayAbbreviation" xml:space="preserve">
-    <value>Fri.</value>
+    <value>fri.</value>
   </data>
   <data name="Fullname" xml:space="preserve">
     <value>Fullname</value>
@@ -217,7 +217,7 @@
     <value>Monday</value>
   </data>
   <data name="MondayAbbreviation" xml:space="preserve">
-    <value>Mon.</value>
+    <value>mon.</value>
   </data>
   <data name="Month" xml:space="preserve">
     <value>Month</value>
@@ -238,7 +238,7 @@
     <value>Saturday</value>
   </data>
   <data name="SaturdayAbbreviation" xml:space="preserve">
-    <value>Sat.</value>
+    <value>sat.</value>
   </data>
   <data name="September" xml:space="preserve">
     <value>September</value>
@@ -250,25 +250,25 @@
     <value>Sunday</value>
   </data>
   <data name="SundayAbbreviation" xml:space="preserve">
-    <value>Sun.</value>
+    <value>sun.</value>
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>Thursday</value>
   </data>
   <data name="ThursdayAbbreviation" xml:space="preserve">
-    <value>Thu.</value>
+    <value>thu.</value>
   </data>
   <data name="Tuesday" xml:space="preserve">
     <value>Tuesday</value>
   </data>
   <data name="TuesdayAbbreviation" xml:space="preserve">
-    <value>Tue.</value>
+    <value>tue.</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>Wednesday</value>
   </data>
   <data name="WednesdayAbbreviation" xml:space="preserve">
-    <value>Wed.</value>
+    <value>wed.</value>
   </data>
   <data name="Year" xml:space="preserve">
     <value>Year</value>
